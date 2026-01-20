@@ -1,6 +1,6 @@
 # Portfoilo
 
-🌟 Portfolio Site – V2 🌟
+
 A simple, clean, and modern portfolio website designed to showcase my skills, projects, and learning journey. Built using HTML, CSS, and JavaScript, this portfolio reflects my passion for technology, design, and continuous growth. 🎨✨
 
 🚀 Features
