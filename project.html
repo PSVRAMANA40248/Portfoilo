@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Projects</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Inter', sans-serif;
+    background:radial-gradient(circle at top, #0b1220, #020617);
+    color:#e5e7eb;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:80px 20px;
+}
+
+.title{
+    text-align:center;
+    font-family:'Orbitron', sans-serif;
+    font-size:64px;
+    margin-bottom:80px;
+}
+
+.title span{
+    color:#c026ff;
+    text-shadow:0 0 20px rgba(192,38,255,0.9);
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
+    gap:40px;
+}
+
+/* CARD */
+.card{
+    background:rgba(255,255,255,0.06);
+    border-radius:20px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.12);
+    backdrop-filter:blur(14px);
+    transition:0.4s ease;
+}
+
+.card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 30px 60px rgba(0,255,255,0.25);
+}
+
+/* IMAGE */
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    background:#000;
+}
+
+/* CONTENT */
+.content{
+    padding:26px;
+}
+
+.content h3{
+    margin:0 0 10px;
+    font-size:22px;
+    color:#67e8f9;
+}
+
+.content p{
+    font-size:14.5px;
+    line-height:1.6;
+    color:#cbd5f5;
+    margin-bottom:20px;
+}
+
+/* TAGS */
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.tag{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    background:rgba(192,38,255,0.15);
+    border:1px solid rgba(192,38,255,0.5);
+    color:#e879f9;
+}
+
+/* BUTTON */
+.btn{
+    display:inline-block;
+    padding:12px 28px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#22d3ee,#c026ff);
+    color:#020617;
+    font-weight:700;
+    text-decoration:none;
+    letter-spacing:1px;
+    transition:0.3s;
+}
+
+.btn:hover{
+    box-shadow:0 0 25px rgba(192,38,255,1);
+    transform:translateY(-3px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1 class="title">MY <span>PROJECTS</span></h1>
+
+<div class="grid">
+
+<!-- Arduino Games -->
+<div class="card">
+<img src="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Screenshot%202026-01-21%20204929.png">
+<div class="content">
+<h3>Interactive Arduino Games</h3>
+<p>Implementation of 2048 and Super Mario using Arduino and button inputs.</p>
+<div class="tags">
+<span class="tag">Arduino</span>
+<span class="tag">C++</span>
+<span class="tag">Game Dev</span>
+</div>
+<a class="btn" href="https://github.com/PSVRAMANA40248/SUPER_MARIO_GAME" target="_blank">&lt;/&gt; VIEW CODE</a>
+</div>
+</div>
+
+<!-- 8 Bit Adder -->
+<div class="card">
+<img src="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Screenshot%202026-01-21%20205110.png">
+<div class="content">
+<h3>8-Bit Adder Using SystemVerilog</h3>
+<p>High-performance 8-bit adder with verification using SystemVerilog.</p>
+<div class="tags">
+<span class="tag">SystemVerilog</span>
+<span class="tag">UVM</span>
+<span class="tag">FPGA</span>
+</div>
+<a class="btn" href="https://github.com/PSVRAMANA40248/8_BIT-ADDER_SYSTEM_VERILOG" target="_blank">&lt;/&gt; VIEW CODE</a>
+</div>
+</div>
+
+<!-- Smart Plant -->
+<div class="card">
+<img src="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Screenshot%202026-01-21%20205352.png">
+<div class="content">
+<h3>Smart Plant Monitoring System</h3>
+<p>IoT-based soil moisture monitoring using STM32 for agriculture.</p>
+<div class="tags">
+<span class="tag">STM32</span>
+<span class="tag">IoT</span>
+<span class="tag">Sensors</span>
+</div>
+<a class="btn" href="https://github.com/PSVRAMANA40248/soil-moisture-sensor-to-an-STM32-microcontroller" target="_blank">&lt;/&gt; VIEW CODE</a>
+</div>
+</div>
+
+<!-- Bluetooth Car -->
+<div class="card">
+<img src="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Screenshot%202026-01-21%20205529.png">
+<div class="content">
+<h3>Bluetooth Controlled Car</h3>
+<p>Smartphone-controlled robotic car using Arduino & HC-05.</p>
+<div class="tags">
+<span class="tag">Arduino</span>
+<span class="tag">Bluetooth</span>
+<span class="tag">Robotics</span>
+</div>
+<a class="btn" href="https://github.com/PSVRAMANA40248/BLUETOOTH_CONTROLLED_CAR" target="_blank">&lt;/&gt; VIEW CODE</a>
+</div>
+</div>
+
+<!-- Smart Street Light -->
+<div class="card">
+<img src="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Screenshot%202026-01-21%20205828.png">
+<div class="content">
+<h3>Smart Street Light System</h3>
+<p>Energy-efficient lighting using IR & LDR sensors.</p>
+<div class="tags">
+<span class="tag">Arduino</span>
+<span class="tag">IoT</span>
+<span class="tag">Sensors</span>
+</div>
+<a class="btn" href="https://github.com/PSVRAMANA40248/Smart-Street-Light-Using-IR_Sensor-and-LDR_Sensor" target="_blank">&lt;/&gt; VIEW CODE</a>
+</div>
+</div>
+
+<!-- SPI -->
+<div class="card">
+<img src="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Screenshot%202026-01-21%20210006.png">
+<div class="content">
+<h3>SPI Slave Implementation</h3>
+<p>Verilog-based SPI slave module for FPGA communication.</p>
+<div class="tags">
+<span class="tag">Verilog</span>
+<span class="tag">SPI</span>
+<span class="tag">FPGA</span>
+</div>
+<a class="btn" href="https://github.com/PSVRAMANA40248/Serial-Peripheral-Interface-SPI---Slave-" target="_blank">&lt;/&gt; VIEW CODE</a>
+</div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
