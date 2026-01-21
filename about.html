@@ -1,248 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact | P. Sai Venkat Ramana</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Pusarla Sai Venkat Ramana</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
---bg-main:#0f172a;
---bg-card:rgba(2,6,23,0.85);
---accent:#38bdf8;
---accent-hover:#0ea5e9;
---text-main:#e5e7eb;
---text-muted:#94a3b8;
-}
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --primary: #7000ff;
+            --secondary: #00d2ff;
+            --accent: #ff0055;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --easing: cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
-*{box-sizing:border-box}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
 
-body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:radial-gradient(circle at top,#020617,#0f172a 60%);
-color:var(--text-main);
-overflow-x:hidden;
-}
+        section { padding: 120px 0; }
+        .container { width: 90%; max-width: 1200px; margin: auto; }
 
-/* BACKGROUND GLOW */
-body::before,body::after{
-content:"";
-position:fixed;
-width:400px;height:400px;
-background:radial-gradient(circle,var(--accent),transparent 70%);
-filter:blur(120px);
-opacity:.15;
-z-index:-1;
-}
-body::before{top:-100px;left:-100px}
-body::after{bottom:-150px;right:-150px}
+        h1, h2, h3 { font-family: 'Syne', sans-serif; }
 
-/* CONTAINER */
-.container{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
-}
+        /* Background */
+        .background-fx {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+        .orb {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: drift 20s infinite alternate;
+        }
+        .orb-1 { background: var(--primary); top: -10%; left: -10%; }
+        .orb-2 { background: var(--secondary); bottom: -10%; right: -10%; }
+        .orb-3 { background: var(--accent); top: 30%; left: 40%; }
 
-h1{text-align:center;margin-bottom:50px}
+        @keyframes drift {
+            to { transform: translate(50px, 50px); }
+        }
 
-/* CONTACT GRID */
-.contact-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-}
+        /* Header */
+        .header {
+            position: fixed;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .navbar {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            padding: 15px 40px;
+            border-radius: 50px;
+            display: flex;
+            gap: 40px;
+            border: 1px solid var(--glass-border);
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+        }
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: white;
+        }
 
-/* INFO BOX */
-.info-box{
-display:flex;
-gap:15px;
-background:var(--bg-card);
-padding:20px;
-border-radius:16px;
-margin-bottom:20px;
-transition:.4s;
-}
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .profile-img-box {
+            border-radius: 30px;
+            overflow: hidden;
+            transform: rotate(-3deg);
+            border: 1px solid var(--glass-border);
+        }
+        .profile-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .about-text h3 { font-size: 2.6rem; }
+        .highlight {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-.info-box:hover{
-transform:rotateY(12deg) translateY(-6px);
-box-shadow:0 20px 40px rgba(56,189,248,.3);
-}
+        .about-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .info-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 15px;
+        }
 
-.info-icon i{font-size:22px;color:var(--accent)}
-.info-text h3{margin:0 0 6px;font-size:16px}
-.info-text p{margin:0;font-size:14px}
-.info-text a{color:var(--accent);text-decoration:none}
+        /* Timeline */
+        .timeline {
+            max-width: 900px;
+            margin: auto;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(var(--primary), var(--secondary));
+        }
+        .timeline-item {
+            width: 50%;
+            padding: 40px;
+        }
+        .timeline-item:nth-child(odd) { text-align: right; }
+        .timeline-item:nth-child(even) { margin-left: 50%; }
 
-/* FORM */
-.contact-form{
-background:var(--bg-card);
-padding:30px;
-border-radius:18px;
-transition:.4s;
-}
+        /* Education */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .edu-card {
+            background: var(--glass-bg);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
 
-.contact-form:hover{
-transform:rotateX(6deg);
-box-shadow:0 25px 50px rgba(56,189,248,.3);
-}
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--glass-border);
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
 
-input,textarea{
-width:100%;
-padding:12px;
-border-radius:10px;
-border:none;
-background:#020617;
-color:#fff;
-margin-bottom:15px;
-}
-
-/* BUTTON */
-.btn{
-padding:12px 26px;
-background:var(--accent);
-color:#020617;
-border-radius:30px;
-font-weight:bold;
-border:none;
-cursor:pointer;
-transition:.3s;
-display:inline-block;
-text-decoration:none;
-}
-
-.btn:hover{
-background:var(--accent-hover);
-transform:translateY(-3px) scale(1.05);
-}
-
-/* ACTION CARDS */
-.action-section{margin-top:70px}
-
-.contact-cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;
-}
-
-.contact-card{
-background:var(--bg-card);
-padding:30px;
-border-radius:20px;
-text-align:center;
-transition:.4s;
-}
-
-.contact-card:hover{
-transform:rotateY(15deg) translateY(-12px);
-box-shadow:0 30px 60px rgba(56,189,248,.35);
-}
-
-.card-img{
-width:100%;
-height:140px;
-border-radius:14px;
-object-fit:cover;
-margin-bottom:15px;
-}
-
-/* FOOTER */
-footer{
-text-align:center;
-margin-top:60px;
-font-size:14px;
-color:var(--text-muted);
-}
-
-@media(max-width:768px){
-.contact-grid{grid-template-columns:1fr}
-}
-</style>
+        @media (max-width: 900px) {
+            .about-content { grid-template-columns: 1fr; text-align: center; }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; margin-left: 0; text-align: left; padding-left: 60px; }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
-
-<h1>Contact P. Sai Venkat Ramana</h1>
-
-<div class="contact-grid">
-
-<!-- LEFT INFO -->
-<div>
-<div class="info-box">
-<div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-<div class="info-text">
-<h3>Base Location</h3>
-<p>Vaddeswaram, Andhra Pradesh, India</p>
-</div>
+<div class="background-fx">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
 </div>
 
-<div class="info-box">
-<div class="info-icon"><i class="fas fa-at"></i></div>
-<div class="info-text">
-<h3>Email</h3>
-<p><a href="mailto:psvr120205@gmail.com">psvr120205@gmail.com</a></p>
-</div>
-</div>
+<header class="header">
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="active" href="about.html">About</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
 
-<div class="info-box">
-<div class="info-icon"><i class="fas fa-signal"></i></div>
-<div class="info-text">
-<h3>WhatsApp</h3>
-<p><a href="https://wa.me/919182709036" target="_blank">+91 9182709036</a></p>
-</div>
-</div>
-</div>
+<section id="about">
+    <div class="container">
+        <div class="about-content">
+            <div class="profile-img-box">
+                <img src="PSVRAMANA.jpg" alt="Pusarla Sai Venkat Ramana">
+            </div>
 
-<!-- RIGHT FORM -->
-<div class="contact-form">
-<input placeholder="Your Name">
-<input placeholder="Email">
-<textarea rows="5" placeholder="Message"></textarea>
-<button class="btn">Send Message</button>
-</div>
+            <div class="about-text">
+                <h3>I'm <span class="highlight">PUSARLA SAI VENKAT RAMANA</span></h3>
+                <p>
+                    I am an Electronics and Communication Engineering student specializing in
+                    <strong>VLSI Design</strong> at KL University. My interests include CMOS digital
+                    design, Verilog HDL, embedded systems, and semiconductor fundamentals.
+                    I focus on converting theoretical concepts into practical implementations
+                    through projects and simulations.
+                </p>
 
-</div>
-
-<!-- ACTION CARDS -->
-<section class="action-section">
-<div class="contact-cards">
-
-<!-- DIRECT COMMAND -->
-<div class="contact-card">
-<img class="card-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475">
-<h3>Direct Command</h3>
-<p>Instant communication channels</p>
-
-<a class="btn" href="https://wa.me/919182709036" target="_blank">WhatsApp</a><br><br>
-<a class="btn" href="https://t.me/UNLUCKYBOY_2005" target="_blank">Telegram</a><br><br>
-<a class="btn" href="https://teams.microsoft.com/v2/" target="_blank">Microsoft Teams</a>
-</div>
-
-<!-- DOWNLOAD CV -->
-<div class="contact-card">
-<img class="card-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
-<h3>Download CV</h3>
-<p>Download my professional resume</p>
-
-<a class="btn"
-href="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Ramana_resume.pdf"
-download="P_Sai_Venkat_Ramana_Resume.pdf">
-Download Resume
-</a>
-</div>
-
-</div>
+                <div class="about-info">
+                    <div class="info-card"><h4>University</h4><span>KL University</span></div>
+                    <div class="info-card"><h4>Branch</h4><span>ECE – VLSI</span></div>
+                    <div class="info-card"><h4>Skills</h4><span>Verilog, CMOS, Embedded</span></div>
+                    <div class="info-card"><h4>Status</h4><span>Open to Internships</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<footer>
-© 2025 P. Sai Venkat Ramana | All Rights Reserved
+<section>
+    <div class="container">
+        <h2 style="text-align:center;">Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>B.Tech ECE</h3>
+                <p>KL University (2022 – Present)</p>
+            </div>
+            <div class="timeline-item">
+                <h3>VLSI & Digital Design</h3>
+                <p>Verilog HDL, FSMs, CMOS Logic</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Embedded Systems</h3>
+                <p>Arduino, Sensors, Automation Projects</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h2 style="text-align:center;">Education</h2>
+        <div class="education-grid">
+            <div class="edu-card">
+                <h3>B.Tech – ECE (VLSI)</h3>
+                <p>KL University | 2022 – Present</p>
+            </div>
+            <div class="edu-card">
+                <h3>Intermediate (MPC)</h3>
+                <p>2020 – 2022</p>
+            </div>
+            <div class="edu-card">
+                <h3>SSC</h3>
+                <p>2018 – 2020</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <h3>Pusarla Sai Venkat Ramana</h3>
+    <div class="social-links">
+        <a href="https://github.com/pusarla_ramana"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>&copy; 2025 PUSARLA SAI VENKAT RAMANA</p>
 </footer>
 
-</div>
 </body>
 </html>
