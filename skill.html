@@ -3,230 +3,589 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Technical Profile</title>
-
+<title>Technical Profile - 3D Edition</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-
 <style>
 :root{
     --bg:#0a0a0a;
-    --card:rgba(255,255,255,0.06);
-    --border:rgba(255,255,255,0.12);
+    --card:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.15);
     --grad:linear-gradient(135deg,#00c6ff,#0072ff);
     --text:#fff;
     --muted:#aaa;
-    --glow:0 0 22px rgba(0,198,255,.45);
+    --glow:0 0 30px rgba(0,198,255,.6);
+    --shadow-3d: 0 25px 50px rgba(0,0,0,0.5);
 }
 
 /* RESET & BODY */
 *{margin:0;padding:0;box-sizing:border-box}
 body{
     font-family:'Outfit',sans-serif;
-    background:radial-gradient(circle at top,#111,#000 60%);
+    background:linear-gradient(-45deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
     color:var(--text);
     overflow-x:hidden;
-    perspective:1000px;
+    perspective:1200px;
+    line-height:1.6;
 }
 
-/* SECTION STYLING */
+/* MOUSE TRACKER */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(0,198,255,0.1) 0%, 
+        transparent 50%);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+body.mouse-tracked::after {
+    opacity: 1;
+}
+
+/* NAVIGATION - 3D */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    padding: 1rem 0;
+    transform-style: preserve-3d;
+}
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+}
+.nav-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background:var(--grad);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin: 0;
+    text-shadow: var(--glow);
+}
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    position: relative;
+}
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--grad);
+    transition: width 0.3s;
+}
+.nav-links a:hover::before {
+    width: 100%;
+}
+.nav-links a:hover {
+    color: #00c6ff;
+    transform: translateY(-3px);
+}
+
+/* CONTAINER */
 .container{
     width:90%;
     max-width:1200px;
     margin:auto;
+    padding-top: 120px;
 }
+
+/* SECTION STYLING */
 section{
-    padding:80px 0;
-    position:relative;
+    padding:120px 0;
+    transform-style: preserve-3d;
 }
 .section-title{
     text-align:center;
-    margin-bottom:50px;
+    margin-bottom:70px;
 }
 .section-title h2{
-    font-size:3rem;
+    font-size:3.5rem;
     font-weight:800;
+    margin-bottom:1rem;
+    text-shadow: 0 0 20px rgba(0,198,255,0.5);
 }
 .section-title span{
     background:var(--grad);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
+    background-clip:text;
 }
 
-/* ============== PAGE MAIN TITLE ============== */
+/* PAGE TITLE - ADVANCED 3D */
 .page-title {
-    font-size:4rem;
-    font-weight:800;
-    color: #00c6ff;
-    text-shadow: 0 0 10px #00c6ff, 0 0 20px #00c6ff, 0 0 30px #00c6ff;
+    font-size:5rem;
+    font-weight:900;
+    background:linear-gradient(45deg, #00c6ff, #0072ff, #00d4ff, #00c6ff);
+    background-size: 400% 400%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
     text-align:center;
     margin-bottom:50px;
-    transition: transform 0.5s ease;
+    animation: gradientShift 4s ease infinite, glowPulse 2s ease-in-out infinite alternate;
+    transform-style: preserve-3d;
+    transform: translateZ(50px);
 }
-.page-title:hover {
-    transform: scale(1.05) rotateX(5deg) rotateY(5deg);
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+@keyframes glowPulse {
+    from { filter: drop-shadow(0 0 20px rgba(0,198,255,0.7)); }
+    to { filter: drop-shadow(0 0 40px rgba(0,198,255,1)); }
 }
 
-/* ============== BOXES ============== */
+/* 3D SKILLS - PARALLAX CARDS */
 .skills-content{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:30px;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:40px;
+    perspective: 1000px;
 }
 
-.skill-box, .certificate-box, .internship-box, .training-box{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:30px;
-    font-size:1.1rem;
-    font-weight:500;
+.skill-box {
+    background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:28px;
+    padding:50px 35px;
     text-align:center;
-    transition:.6s ease;
+    transition:all 0.8s cubic-bezier(0.23,1,0.32,1);
     transform-style:preserve-3d;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-3d);
 }
-.skill-box:hover, .certificate-box:hover, .internship-box:hover, .training-box:hover{
-    transform: translateY(-15px) rotateX(8deg) rotateY(8deg) scale(1.05);
-    box-shadow: 0 20px 50px rgba(0,198,255,0.4), 0 0 30px rgba(0,198,255,0.2) inset;
+.skill-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,198,255,0.3), transparent);
+    transition: left 0.8s;
+    transform: skewX(-25deg);
+}
+.skill-box:hover::before {
+    left: 150%;
+}
+.skill-box:hover{
+    transform: translateY(-30px) translateZ(60px) rotateX(15deg) rotateY(15deg) scale(1.08);
+    box-shadow: 0 40px 80px rgba(0,198,255,0.4), 0 0 60px rgba(0,198,255,0.6);
+}
+.skill-box i {
+    font-size: 5rem;
+    color: #00c6ff;
+    margin-bottom: 25px;
+    display: block;
+    transform: translateZ(20px);
+    transition: all 0.4s;
+}
+.skill-box:hover i {
+    transform: translateZ(40px) scale(1.2) rotateY(360deg);
+}
+.skill-box h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    transform: translateZ(10px);
 }
 
-/* ============== TOOLS ============== */
+/* 3D TOOLS - FLOATING */
 .tools-content{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:30px;
-    max-width:900px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:35px;
+    max-width:1100px;
     margin:auto;
 }
 .tool-box{
-    height:170px;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
+    height:220px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.04));
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:28px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    transition:.5s ease;
+    transition:all 0.7s cubic-bezier(0.68,-0.55,0.265,1.55);
     transform-style:preserve-3d;
-    perspective:800px;
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(25px);
+    position: relative;
+}
+.tool-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    padding: 2px;
+    background: var(--grad);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.tool-box:hover::after {
+    opacity: 1;
 }
 .tool-box:hover{
-    transform: rotateX(10deg) rotateY(-10deg) translateY(-12px) scale(1.07);
-    box-shadow: 0 25px 50px rgba(0,198,255,0.5);
+    transform: translateY(-35px) translateZ(80px) rotateX(20deg) rotateY(-20deg) scale(1.12);
+    box-shadow: 0 50px 100px rgba(0,198,255,0.5), 0 0 80px rgba(0,198,255,0.7);
 }
 .tool-box i{
-    font-size:3rem;
-    margin-bottom:15px;
+    font-size:4rem;
+    margin-bottom:25px;
     color:#00c6ff;
+    transition: all 0.5s;
+    transform: translateZ(30px);
+}
+.tool-box:hover i {
+    transform: translateZ(60px) scale(1.3) rotate(360deg);
 }
 .tool-box h3{
-    font-weight:500;
-    color:var(--muted);
+    font-weight:700;
+    color:var(--text);
+    margin: 0;
+    transform: translateZ(15px);
 }
 
-/* ============== BACKGROUND ANIMATION ============== */
-body::before {
-    content:"";
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:radial-gradient(circle at 30% 30%, rgba(0,198,255,0.1), transparent 70%),
-               radial-gradient(circle at 70% 70%, rgba(0,198,255,0.08), transparent 70%);
-    z-index:-1;
-    animation: float 12s infinite linear;
+/* FIXED CERTIFICATES & TRAININGS - NO OVERFLOW */
+.certificate-box, .training-box{
+    background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:28px;
+    padding:30px 25px;  /* Reduced padding */
+    transition:all 0.8s cubic-bezier(0.23,1,0.32,1);
+    transform-style:preserve-3d;
+    backdrop-filter: blur(20px);
+    text-align: center;
+    position: relative;
+    min-height: 180px;  /* Fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;  /* Prevent text overflow */
 }
-@keyframes float{
-    0%{background-position:0 0, 0 0;}
-    50%{background-position:100% 100%, 50% 50%;}
-    100%{background-position:0 0, 0 0;}
+.certificate-box:hover, .training-box:hover{
+    transform: translateY(-25px) translateZ(50px) rotateX(12deg) scale(1.07);
+    box-shadow: var(--glow), 0 40px 80px rgba(0,198,255,0.4);
+}
+.certificate-box i, .training-box i {
+    font-size:2.8rem;  /* Smaller icon */
+    color:#00c6ff;
+    margin-bottom:15px;  /* Reduced margin */
+    flex-shrink: 0;
+}
+.certificate-box strong {
+    font-size: 1.2rem;  /* Smaller font */
+    display: block;
+    margin-bottom: 8px;
+    color: #00c6ff;
+    line-height: 1.3;
+    flex-shrink: 0;
+}
+.certificate-box div {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    flex: 1;
+}
+.training-box {
+    text-align: left;
+    padding: 25px 25px 20px;  /* Less bottom padding */
+}
+.training-box strong {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: #00c6ff;
+    line-height: 1.3;
+    flex-shrink: 0;
+}
+.training-box p {
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    flex: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.training-box em {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    flex-shrink: 0;
+}
+
+/* PARTICLE SYSTEM */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(0,198,255,0.6);
+    border-radius: 50%;
+    animation: floatParticle 20s infinite linear;
+}
+@keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-container { justify-content: center; }
+    .page-title { font-size: 3.2rem; }
+    .section-title h2 { font-size: 2.5rem; }
+    .skills-content, .tools-content { grid-template-columns: 1fr; gap: 25px; }
+    .certificate-box, .training-box { min-height: 160px; padding: 20px 20px 15px; }
+    section { padding: 80px 0; }
+    .container { padding-top: 90px; }
+}
+
+/* SMOOTH SCROLL */
+html { scroll-behavior: smooth; }
+
+/* 3D SPACE EFFECT */
+section { position: relative; }
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(0,198,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0,114,255,0.08) 0%, transparent 50%);
+    z-index: -1;
+    animation: spaceFloat 25s infinite ease-in-out;
+}
+@keyframes spaceFloat {
+    0%, 100% { transform: scale(1) rotateZ(0deg); }
+    33% { transform: scale(1.2) rotateZ(120deg); }
+    66% { transform: scale(0.9) rotateZ(240deg); }
 }
 </style>
 </head>
 <body>
 
-<!-- ================= MAIN TITLE ================= -->
+<!-- MOUSE TRACKER SCRIPT -->
+<script>
+document.addEventListener('mousemove', (e) => {
+    document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+    document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+    document.body.classList.add('mouse-tracked');
+});
+</script>
+
+<!-- PARTICLE SYSTEM -->
+<div class="particles" id="particles"></div>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+    <div class="nav-container">
+        <h2 class="nav-logo">Tech Profile 3D</h2>
+        <ul class="nav-links">
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#certs">Certs</a></li>
+            <li><a href="#trainings">Trainings</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- MAIN TITLE -->
 <section>
-  <div class="container">
-    <h1 class="page-title">My Technical Profile</h1>
-  </div>
+    <div class="container">
+        <h1 class="page-title" id="home">My Technical Profile</h1>
+    </div>
 </section>
 
-<!-- ================= SKILLS ================= -->
-<section>
+<!-- SKILLS -->
+<section id="skills">
 <div class="container">
     <div class="section-title">
         <h2>Technical <span>Skills</span></h2>
     </div>
     <div class="skills-content">
-        <div class="skill-box">C</div>
-        <div class="skill-box">Java</div>
-        <div class="skill-box">Verilog</div>
-        <div class="skill-box">SystemVerilog</div>
+        <div class="skill-box">
+            <i class="fab fa-cuttlefish"></i>
+            <h3>C Programming</h3>
+        </div>
+        <div class="skill-box">
+            <i class="fab fa-java"></i>
+            <h3>Java</h3>
+        </div>
+        <div class="skill-box">
+            <i class="fas fa-code-branch"></i>
+            <h3>Verilog</h3>
+        </div>
+        <div class="skill-box">
+            <i class="fas fa-project-diagram"></i>
+            <h3>SystemVerilog</h3>
+        </div>
     </div>
 </div>
 </section>
 
-<!-- ================= TOOLS ================= -->
-<section>
+<!-- TOOLS -->
+<section id="tools">
 <div class="container">
     <div class="section-title">
         <h2>Workflow <span>Tools</span></h2>
     </div>
     <div class="tools-content">
-        <div class="tool-box"><i class="fas fa-microchip"></i><h3>Cadence</h3></div>
-        <div class="tool-box"><i class="fas fa-wave-square"></i><h3>Multisim</h3></div>
-        <div class="tool-box"><i class="fas fa-project-diagram"></i><h3>Xilinx Vivado</h3></div>
-        <div class="tool-box"><i class="fas fa-robot"></i><h3>Arduino IDE</h3></div>
-        <div class="tool-box"><i class="fas fa-cube"></i><h3>Tinkercad</h3></div>
-        <div class="tool-box"><i class="fas fa-terminal"></i><h3>EDA Playground</h3></div>
+        <div class="tool-box">
+            <i class="fas fa-microchip"></i>
+            <h3>Cadence</h3>
+        </div>
+        <div class="tool-box">
+            <i class="fas fa-wave-square"></i>
+            <h3>Multisim</h3>
+        </div>
+        <div class="tool-box">
+            <i class="fas fa-rocket"></i>
+            <h3>Xilinx Vivado</h3>
+        </div>
+        <div class="tool-box">
+            <i class="fas fa-robot"></i>
+            <h3>Arduino IDE</h3>
+        </div>
+        <div class="tool-box">
+            <i class="fas fa-cubes"></i>
+            <h3>Tinkercad</h3>
+        </div>
+        <div class="tool-box">
+            <i class="fas fa-terminal"></i>
+            <h3>EDA Playground</h3>
+        </div>
     </div>
 </div>
 </section>
 
-<!-- ================= CERTIFICATIONS ================= -->
-<section>
+<!-- CERTIFICATIONS -->
+<section id="certs">
 <div class="container">
     <div class="section-title">
         <h2>Certifications</h2>
     </div>
     <div class="skills-content">
-        <div class="certificate-box">Embedded Systems & IoT Programming – TARAS Solutions</div>
-        <div class="certificate-box">Salesforce AI Associate – Certified</div>
-        <div class="certificate-box">SystemVerilog Training – Abhyasa Training</div>
-        <div class="certificate-box">Spectre Simulator Fundamentals S1: Spectre Basics vSPECTRE23.1 – Cadence</div>
-        <div class="certificate-box">Artificial Intelligence and Machine Learning Using Python (Industrial Automation) – L1</div>
-        <div class="certificate-box">Proficient in MS Office & C Language Basics</div>
+        <div class="certificate-box">
+            <i class="fas fa-certificate"></i>
+            <strong>Embedded Systems & IoT</strong>
+            <div>TARAS Solutions</div>
+        </div>
+        <div class="certificate-box">
+            <i class="fas fa-certificate"></i>
+            <strong>Salesforce AI Associate</strong>
+            <div>Certified</div>
+        </div>
+        <div class="certificate-box">
+            <i class="fas fa-certificate"></i>
+            <strong>SystemVerilog Training</strong>
+            <div>Abhyasa Training</div>
+        </div>
+        <div class="certificate-box">
+            <i class="fas fa-certificate"></i>
+            <strong>Spectre Fundamentals</strong>
+            <div>Cadence vSPECTRE23.1</div>
+        </div>
+        <div class="certificate-box">
+            <i class="fas fa-certificate"></i>
+            <strong>AI & ML Using Python</strong>
+            <div>Industrial Automation L1</div>
+        </div>
+        <div class="certificate-box">
+            <i class="fas fa-certificate"></i>
+            <strong>MS Office & C Basics</strong>
+            <div>Proficient</div>
+        </div>
     </div>
 </div>
 </section>
 
-<!-- ================= TRAININGS ================= -->
-<section>
+<!-- TRAININGS - FIXED LAYOUT -->
+<section id="trainings">
 <div class="container">
     <div class="section-title">
         <h2>Trainings</h2>
     </div>
     <div class="skills-content">
         <div class="training-box">
-            <strong>SystemVerilog Training – Abhyasa</strong><br>
-            Built and verified 8-bit adder using UVM methodology; Linux commands.<br>
-            <em>Skills:</em> SystemVerilog, UVM, Testbench Design, Verification, Linux
+            <i class="fas fa-graduation-cap"></i>
+            <strong>SystemVerilog Training – Abhyasa</strong>
+            <p>Built and verified 8-bit adder using UVM methodology; Linux commands.</p>
+            <em>SystemVerilog, UVM, Testbench, Verification, Linux</em>
         </div>
         <div class="training-box">
-            <strong>Verilog Design Training – Codetech IT Solutions</strong><br>
-            Intermediate-level digital design training.<br>
-            <em>Skills:</em> Verilog, HDL, Digital Design
+            <i class="fas fa-graduation-cap"></i>
+            <strong>Verilog Design Training</strong>
+            <p>Intermediate-level digital design training.</p>
+            <em>Verilog, HDL, Digital Design</em>
         </div>
     </div>
 </div>
 </section>
+
+<!-- PARTICLE GENERATOR -->
+<script>
+function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        particlesContainer.appendChild(particle);
+    }
+}
+createParticles();
+</script>
 
 </body>
 </html>
