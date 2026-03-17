@@ -3,591 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Technical Profile - 3D Edition</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Technical Profile</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
 <style>
 :root{
-    --bg:#0a0a0a;
-    --card:rgba(255,255,255,0.08);
-    --border:rgba(255,255,255,0.15);
-    --grad:linear-gradient(135deg,#00c6ff,#0072ff);
-    --text:#fff;
-    --muted:#aaa;
-    --glow:0 0 30px rgba(0,198,255,.6);
-    --shadow-3d: 0 25px 50px rgba(0,0,0,0.5);
+    --bg:#0d1117;
+    --card:#161b22;
+    --border:#30363d;
+    --accent:#00c6ff;
+    --text:#e6edf3;
+    --muted:#8b949e;
 }
 
-/* RESET & BODY */
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
     font-family:'Outfit',sans-serif;
-    background:linear-gradient(-45deg, #0a0a0a 0%, #1a0a2e 50%, #16213e 100%);
+    background:var(--bg);
     color:var(--text);
-    overflow-x:hidden;
-    perspective:1200px;
-    line-height:1.6;
+    scroll-behavior:smooth;
 }
 
-/* MOUSE TRACKER */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-        rgba(0,198,255,0.1) 0%, 
-        transparent 50%);
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-body.mouse-tracked::after {
-    opacity: 1;
+/* ===== NAVBAR ===== */
+.navbar{
+    position:fixed;
+    top:20px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    z-index:1000;
 }
 
-/* NAVIGATION - 3D */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(20px);
-    z-index: 1000;
-    padding: 1rem 0;
-    transform-style: preserve-3d;
-}
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5%;
-}
-.nav-logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    background:var(--grad);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    margin: 0;
-    text-shadow: var(--glow);
-}
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-.nav-links a {
-    color: var(--text);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-    position: relative;
-}
-.nav-links a::before {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--grad);
-    transition: width 0.3s;
-}
-.nav-links a:hover::before {
-    width: 100%;
-}
-.nav-links a:hover {
-    color: #00c6ff;
-    transform: translateY(-3px);
+.nav-wrapper{
+    position:relative;
+    background:rgba(20,20,30,0.6);
+    backdrop-filter:blur(12px);
+    border-radius:50px;
+    padding:10px 25px;
+    border:1px solid rgba(255,255,255,0.1);
 }
 
-/* CONTAINER */
+.nav-menu{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.nav-menu a{
+    color:#c9d1d9;
+    text-decoration:none;
+    padding:8px 14px;
+    border-radius:20px;
+    transition:0.3s;
+}
+
+.nav-menu a:hover{
+    background:rgba(0,198,255,0.2);
+    color:#fff;
+}
+
+.nav-menu a.active{
+    background:linear-gradient(135deg,#00c6ff,#0072ff);
+    color:#fff;
+}
+
+/* ===== LAYOUT ===== */
 .container{
     width:90%;
-    max-width:1200px;
-    margin:auto;
-    padding-top: 120px;
-}
-
-/* SECTION STYLING */
-section{
-    padding:120px 0;
-    transform-style: preserve-3d;
-}
-.section-title{
-    text-align:center;
-    margin-bottom:70px;
-}
-.section-title h2{
-    font-size:3.5rem;
-    font-weight:800;
-    margin-bottom:1rem;
-    text-shadow: 0 0 20px rgba(0,198,255,0.5);
-}
-.section-title span{
-    background:var(--grad);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-}
-
-/* PAGE TITLE - ADVANCED 3D */
-.page-title {
-    font-size:5rem;
-    font-weight:900;
-    background:linear-gradient(45deg, #00c6ff, #0072ff, #00d4ff, #00c6ff);
-    background-size: 400% 400%;
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-    text-align:center;
-    margin-bottom:50px;
-    animation: gradientShift 4s ease infinite, glowPulse 2s ease-in-out infinite alternate;
-    transform-style: preserve-3d;
-    transform: translateZ(50px);
-}
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-@keyframes glowPulse {
-    from { filter: drop-shadow(0 0 20px rgba(0,198,255,0.7)); }
-    to { filter: drop-shadow(0 0 40px rgba(0,198,255,1)); }
-}
-
-/* 3D SKILLS - PARALLAX CARDS */
-.skills-content{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:40px;
-    perspective: 1000px;
-}
-
-.skill-box {
-    background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
-    border:1px solid rgba(255,255,255,0.2);
-    border-radius:28px;
-    padding:50px 35px;
-    text-align:center;
-    transition:all 0.8s cubic-bezier(0.23,1,0.32,1);
-    transform-style:preserve-3d;
-    backdrop-filter: blur(20px);
-    position: relative;
-    overflow: hidden;
-    box-shadow: var(--shadow-3d);
-}
-.skill-box::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 150%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0,198,255,0.3), transparent);
-    transition: left 0.8s;
-    transform: skewX(-25deg);
-}
-.skill-box:hover::before {
-    left: 150%;
-}
-.skill-box:hover{
-    transform: translateY(-30px) translateZ(60px) rotateX(15deg) rotateY(15deg) scale(1.08);
-    box-shadow: 0 40px 80px rgba(0,198,255,0.4), 0 0 60px rgba(0,198,255,0.6);
-}
-.skill-box i {
-    font-size: 5rem;
-    color: #00c6ff;
-    margin-bottom: 25px;
-    display: block;
-    transform: translateZ(20px);
-    transition: all 0.4s;
-}
-.skill-box:hover i {
-    transform: translateZ(40px) scale(1.2) rotateY(360deg);
-}
-.skill-box h3 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin: 0;
-    transform: translateZ(10px);
-}
-
-/* 3D TOOLS - FLOATING */
-.tools-content{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:35px;
     max-width:1100px;
     margin:auto;
-}
-.tool-box{
-    height:220px;
-    background:linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.04));
-    border:1px solid rgba(255,255,255,0.25);
-    border-radius:28px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    transition:all 0.7s cubic-bezier(0.68,-0.55,0.265,1.55);
-    transform-style:preserve-3d;
-    backdrop-filter: blur(25px);
-    position: relative;
-}
-.tool-box::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 28px;
-    padding: 2px;
-    background: var(--grad);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask-composite: xor;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.tool-box:hover::after {
-    opacity: 1;
-}
-.tool-box:hover{
-    transform: translateY(-35px) translateZ(80px) rotateX(20deg) rotateY(-20deg) scale(1.12);
-    box-shadow: 0 50px 100px rgba(0,198,255,0.5), 0 0 80px rgba(0,198,255,0.7);
-}
-.tool-box i{
-    font-size:4rem;
-    margin-bottom:25px;
-    color:#00c6ff;
-    transition: all 0.5s;
-    transform: translateZ(30px);
-}
-.tool-box:hover i {
-    transform: translateZ(60px) scale(1.3) rotate(360deg);
-}
-.tool-box h3{
-    font-weight:700;
-    color:var(--text);
-    margin: 0;
-    transform: translateZ(15px);
+    padding-top:120px;
 }
 
-/* FIXED CERTIFICATES & TRAININGS - NO OVERFLOW */
-.certificate-box, .training-box{
-    background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
-    border:1px solid rgba(255,255,255,0.2);
-    border-radius:28px;
-    padding:30px 25px;  /* Reduced padding */
-    transition:all 0.8s cubic-bezier(0.23,1,0.32,1);
-    transform-style:preserve-3d;
-    backdrop-filter: blur(20px);
-    text-align: center;
-    position: relative;
-    min-height: 180px;  /* Fixed height */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    overflow: hidden;  /* Prevent text overflow */
-}
-.certificate-box:hover, .training-box:hover{
-    transform: translateY(-25px) translateZ(50px) rotateX(12deg) scale(1.07);
-    box-shadow: var(--glow), 0 40px 80px rgba(0,198,255,0.4);
-}
-.certificate-box i, .training-box i {
-    font-size:2.8rem;  /* Smaller icon */
-    color:#00c6ff;
-    margin-bottom:15px;  /* Reduced margin */
-    flex-shrink: 0;
-}
-.certificate-box strong {
-    font-size: 1.2rem;  /* Smaller font */
-    display: block;
-    margin-bottom: 8px;
-    color: #00c6ff;
-    line-height: 1.3;
-    flex-shrink: 0;
-}
-.certificate-box div {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.4;
-    flex: 1;
-}
-.training-box {
-    text-align: left;
-    padding: 25px 25px 20px;  /* Less bottom padding */
-}
-.training-box strong {
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-    color: #00c6ff;
-    line-height: 1.3;
-    flex-shrink: 0;
-}
-.training-box p {
-    color: var(--text);
-    margin-bottom: 10px;
-    line-height: 1.5;
-    font-size: 0.95rem;
-    flex: 1;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-.training-box em {
-    color: var(--muted);
-    font-style: italic;
-    font-size: 0.85rem;
-    line-height: 1.3;
-    flex-shrink: 0;
+section{
+    padding:80px 0;
 }
 
-/* PARTICLE SYSTEM */
-.particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: -1;
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
 }
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: rgba(0,198,255,0.6);
-    border-radius: 50%;
-    animation: floatParticle 20s infinite linear;
+
+.section-title h2{
+    font-size:2.5rem;
 }
-@keyframes floatParticle {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+
+.section-title span{
+    color:var(--accent);
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+/* CARD */
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:25px;
+    text-align:center;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:var(--accent);
+    box-shadow:0 10px 30px rgba(0,198,255,0.2);
+}
+
+/* TRAINING */
+.training{
+    text-align:left;
+}
+
+/* FOOTER / CONTACT */
+.contact{
+    text-align:center;
+}
+
+.contact p{
+    margin-top:10px;
+    color:var(--muted);
 }
 
 /* RESPONSIVE */
-@media (max-width: 768px) {
-    .nav-links { display: none; }
-    .nav-container { justify-content: center; }
-    .page-title { font-size: 3.2rem; }
-    .section-title h2 { font-size: 2.5rem; }
-    .skills-content, .tools-content { grid-template-columns: 1fr; gap: 25px; }
-    .certificate-box, .training-box { min-height: 160px; padding: 20px 20px 15px; }
-    section { padding: 80px 0; }
-    .container { padding-top: 90px; }
-}
-
-/* SMOOTH SCROLL */
-html { scroll-behavior: smooth; }
-
-/* 3D SPACE EFFECT */
-section { position: relative; }
-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(0,198,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0,114,255,0.08) 0%, transparent 50%);
-    z-index: -1;
-    animation: spaceFloat 25s infinite ease-in-out;
-}
-@keyframes spaceFloat {
-    0%, 100% { transform: scale(1) rotateZ(0deg); }
-    33% { transform: scale(1.2) rotateZ(120deg); }
-    66% { transform: scale(0.9) rotateZ(240deg); }
+@media(max-width:768px){
+    .nav-menu{gap:12px;font-size:0.9rem;}
 }
 </style>
 </head>
+
 <body>
 
-<!-- MOUSE TRACKER SCRIPT -->
-<script>
-document.addEventListener('mousemove', (e) => {
-    document.body.style.setProperty('--mouse-x', e.clientX + 'px');
-    document.body.style.setProperty('--mouse-y', e.clientY + 'px');
-    document.body.classList.add('mouse-tracked');
-});
-</script>
-
-<!-- PARTICLE SYSTEM -->
-<div class="particles" id="particles"></div>
-
-<!-- NAVIGATION -->
+<!-- NAVBAR -->
 <nav class="navbar">
-    <div class="nav-container">
-        <h2 class="nav-logo">Tech Profile 3D</h2>
-        <ul class="nav-links">
+    <div class="nav-wrapper">
+        <ul class="nav-menu">
+            <li><a href="#home" class="active">Home</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#tools">Tools</a></li>
             <li><a href="#certs">Certs</a></li>
             <li><a href="#trainings">Trainings</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#talent">SpecialTalents</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
     </div>
 </nav>
 
-<!-- MAIN TITLE -->
-<section>
-    <div class="container">
-        <h1 class="page-title" id="home">My Technical Profile</h1>
+<!-- HOME -->
+<section id="home">
+<div class="container">
+    <div class="section-title">
+        <h2>My <span>Technical Profile</span></h2>
     </div>
+</div>
 </section>
 
 <!-- SKILLS -->
 <section id="skills">
 <div class="container">
-    <div class="section-title">
-        <h2>Technical <span>Skills</span></h2>
-    </div>
-    <div class="skills-content">
-        <div class="skill-box">
-            <i class="fab fa-cuttlefish"></i>
-            <h3>C Programming</h3>
-        </div>
-        <div class="skill-box">
-            <i class="fab fa-java"></i>
-            <h3>Java</h3>
-        </div>
-        <div class="skill-box">
-            <i class="fas fa-code-branch"></i>
-            <h3>Verilog</h3>
-        </div>
-        <div class="skill-box">
-            <i class="fas fa-project-diagram"></i>
-            <h3>SystemVerilog</h3>
-        </div>
-    </div>
+<div class="section-title"><h2>Skills</h2></div>
+
+<div class="grid">
+<div class="card">C Programming</div>
+<div class="card">Java</div>
+<div class="card">Verilog</div>
+<div class="card">SystemVerilog</div>
+</div>
+
 </div>
 </section>
 
 <!-- TOOLS -->
 <section id="tools">
 <div class="container">
-    <div class="section-title">
-        <h2>Workflow <span>Tools</span></h2>
-    </div>
-    <div class="tools-content">
-        <div class="tool-box">
-            <i class="fas fa-microchip"></i>
-            <h3>Cadence</h3>
-        </div>
-        <div class="tool-box">
-            <i class="fas fa-wave-square"></i>
-            <h3>Multisim</h3>
-        </div>
-        <div class="tool-box">
-            <i class="fas fa-rocket"></i>
-            <h3>Xilinx Vivado</h3>
-        </div>
-        <div class="tool-box">
-            <i class="fas fa-robot"></i>
-            <h3>Arduino IDE</h3>
-        </div>
-        <div class="tool-box">
-            <i class="fas fa-cubes"></i>
-            <h3>Tinkercad</h3>
-        </div>
-        <div class="tool-box">
-            <i class="fas fa-terminal"></i>
-            <h3>EDA Playground</h3>
-        </div>
-    </div>
+<div class="section-title"><h2>Tools</h2></div>
+
+<div class="grid">
+<div class="card">Cadence</div>
+<div class="card">Multisim</div>
+<div class="card">Vivado</div>
+<div class="card">Arduino</div>
+</div>
+
 </div>
 </section>
 
-<!-- CERTIFICATIONS -->
+<!-- CERTS -->
 <section id="certs">
 <div class="container">
-    <div class="section-title">
-        <h2>Certifications</h2>
-    </div>
-    <div class="skills-content">
-        <div class="certificate-box">
-            <i class="fas fa-certificate"></i>
-            <strong>Embedded Systems & IoT</strong>
-            <div>TARAS Solutions</div>
-        </div>
-        <div class="certificate-box">
-            <i class="fas fa-certificate"></i>
-            <strong>Salesforce AI Associate</strong>
-            <div>Certified</div>
-        </div>
-        <div class="certificate-box">
-            <i class="fas fa-certificate"></i>
-            <strong>SystemVerilog Training</strong>
-            <div>Abhyasa Training</div>
-        </div>
-        <div class="certificate-box">
-            <i class="fas fa-certificate"></i>
-            <strong>Spectre Fundamentals</strong>
-            <div>Cadence vSPECTRE23.1</div>
-        </div>
-        <div class="certificate-box">
-            <i class="fas fa-certificate"></i>
-            <strong>AI & ML Using Python</strong>
-            <div>Industrial Automation L1</div>
-        </div>
-        <div class="certificate-box">
-            <i class="fas fa-certificate"></i>
-            <strong>MS Office & C Basics</strong>
-            <div>Proficient</div>
-        </div>
-    </div>
+<div class="section-title"><h2>Certifications</h2></div>
+
+<div class="grid">
+<div class="card">Embedded Systems & IoT</div>
+<div class="card">Salesforce AI</div>
+<div class="card">Spectre</div>
+<div class="card">AI & ML</div>
+<div class="card">MS Office & C</div>
+</div>
+
 </div>
 </section>
 
-<!-- TRAININGS - FIXED LAYOUT -->
+<!-- TRAININGS -->
 <section id="trainings">
 <div class="container">
-    <div class="section-title">
-        <h2>Trainings</h2>
-    </div>
-    <div class="skills-content">
-        <div class="training-box">
-            <i class="fas fa-graduation-cap"></i>
-            <strong>SystemVerilog Training – Abhyasa</strong>
-            <p>Built and verified 8-bit adder using UVM methodology; Linux commands.</p>
-            <em>SystemVerilog, UVM, Testbench, Verification, Linux</em>
-        </div>
-        <div class="training-box">
-            <i class="fas fa-graduation-cap"></i>
-            <strong>Verilog Design Training</strong>
-            <p>Intermediate-level digital design training.</p>
-            <em>Verilog, HDL, Digital Design</em>
-        </div>
-    </div>
+<div class="section-title"><h2>Trainings</h2></div>
+
+<div class="grid">
+<div class="card training">
+<h3>SystemVerilog Training</h3>
+<p>8-bit adder using UVM</p>
+</div>
+
+<div class="card training">
+<h3>Verilog Training</h3>
+<p>Digital design concepts</p>
+</div>
+</div>
+
 </div>
 </section>
 
-<!-- PARTICLE GENERATOR -->
+<!-- PROJECTS -->
+<section id="projects">
+<div class="container">
+<div class="section-title"><h2>Projects</h2></div>
+
+<div class="grid">
+<div class="card">Project 1</div>
+<div class="card">Project 2</div>
+</div>
+
+</div>
+</section>
+
+<!-- SPECIAL TALENTS -->
+<section id="talent">
+<div class="container">
+<div class="section-title"><h2>Special Talents</h2></div>
+
+<div class="grid">
+<div class="card">Problem Solving</div>
+<div class="card">Quick Learning</div>
+</div>
+
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<div class="container contact">
+<div class="section-title"><h2>Contact</h2></div>
+
+<p>Email: your@email.com</p>
+<p>Phone: 1234567890</p>
+
+</div>
+</section>
+
+<!-- ACTIVE NAV SCRIPT -->
 <script>
-function createParticles() {
-    const particlesContainer = document.getElementById('particles');
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-        particlesContainer.appendChild(particle);
-    }
-}
-createParticles();
+const links = document.querySelectorAll('.nav-menu a');
+
+links.forEach(link => {
+    link.addEventListener('click', () => {
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
 </script>
 
 </body>
 </html>
-
-can you change the style
