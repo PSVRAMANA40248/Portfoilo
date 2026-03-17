@@ -1,202 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | P.SAI VENKAT RAMANA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | P.SAI VENKAT RAMANA</title>
 
-    <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">    
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --main-bg: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
-            --glass-bg: rgba(255,255,255,0.25);
-            --glass-blur: blur(13px);
-            --accent: #605DFF;
-            --accent2: #11C0E2;
-            --accent3: #633BCE;
-            --font-main: 'Montserrat', sans-serif;
-            --font-mono: 'Fira Mono', monospace;
-            --header-height: 75px;
-            --border-radius: 20px;
-        }
+<style>
+:root {
+    --accent: #605DFF;
+    --accent2: #11C0E2;
+    --font-main: 'Montserrat', sans-serif;
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0; padding: 0;
-        }
+body {
+    margin: 0;
+    font-family: var(--font-main);
+    background: linear-gradient(120deg,#e0eafc,#cfdef3);
+}
 
-        body {
-            min-height: 100vh;
-            font-family: var(--font-main);
-            background: var(--main-bg);
-            color: #21243c;
-        }
+/* HEADER */
+.header {
+    position: fixed;
+    width: 100%;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+}
 
-        /* HEADER */
-        .header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            height: var(--header-height);
-            box-shadow: 0 8px 32px rgba(60,60,60,0.06);
-            z-index: 100;
-            display: flex; align-items: center;
-        }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 40px;
+}
 
-        .navbar {
-            width: 100%; max-width: 1200px;
-            margin: 0 auto;
-            display: flex; justify-content: space-between;
-            padding: 0 40px;
-        }
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
 
-        .logo h2 {
-            font-family: var(--font-mono);
-            color: var(--accent);
-        }
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+}
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-        }
+/* HERO */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+}
 
-        .nav-links li {
-            margin-left: 25px;
-        }
+.hero-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+}
 
-        .nav-links a {
-            text-decoration: none;
-            color: #3a406a;
-            font-family: var(--font-mono);
-        }
+/* TEXT */
+.hero-text {
+    max-width: 450px;
+}
 
-        .nav-links a:hover {
-            color: var(--accent);
-        }
+.hero-text h1 {
+    font-size: 2.5rem;
+}
 
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: var(--header-height);
-        }
+/* ✅ FIXED BUTTONS */
+.hero-btns {
+    display: flex;
+    flex-wrap: wrap;      /* prevents overlap */
+    gap: 15px;            /* spacing */
+    margin-top: 20px;
+}
 
-        .hero-inner {
-            display: flex;
-            gap: 50px;
-            flex-wrap: wrap;
-        }
+.btn {
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    min-width: 150px;
+    text-align: center;
+}
 
-        .hero-text {
-            max-width: 450px;
-        }
+/* BUTTON COLORS */
+.primary-btn {
+    background: linear-gradient(90deg,var(--accent),var(--accent2));
+    color: white;
+}
 
-        .hero-text h1 {
-            font-size: 2.5rem;
-        }
+.secondary-btn {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+}
 
-        .hero-btns {
-            margin-top: 20px;
-        }
+/* IMAGE */
+.profile-card img {
+    width: 250px;
+    border-radius: 15px;
+}
 
-        .btn {
-            padding: 12px 20px;
-            margin-right: 10px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .primary-btn {
-            background: var(--accent);
-            color: white;
-        }
-
-        .secondary-btn {
-            border: 2px solid var(--accent);
-            color: var(--accent);
-        }
-
-        .profile-card img {
-            width: 250px;
-            border-radius: 15px;
-        }
-    </style>
+/* MOBILE */
+@media(max-width:600px){
+    .hero-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header class="header">
-    <nav class="navbar">
-        <div class="logo">
-            <h2>My Portfolio</h2>
-        </div>
+<nav class="navbar">
+    <h2>My Portfolio</h2>
 
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="skill.html">Skills</a></li>
-            <li><a href="project.html">Projects</a></li>
-            <li><a href="Specialtalent.html">Specialtalent</a></li>
-            <li><a href="contact.html">Contact</a></li>
+    <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Skills</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li>
 
-            <!-- Resume Link -->
-            <li><a href="./resume.pdf" target="_blank">Resume</a></li>
-        </ul>
-    </nav>
+        <!-- Resume Navbar -->
+        <li><a href="./resume.pdf" target="_blank">Resume</a></li>
+    </ul>
+</nav>
 </header>
 
 <section class="hero">
-    <div class="hero-inner">
+<div class="hero-inner">
 
-        <div class="hero-text">
-            <h4>Hello and Welcome</h4>
-            <h1>P.SAI VENKAT RAMANA</h1>
+<div class="hero-text">
+    <h4>Hello and Welcome</h4>
+    <h1>P.SAI VENKAT RAMANA</h1>
 
-            <p>
-                Passionate about learning and building <strong>VLSI circuits</strong>.
-                I enjoy working on digital design, verification, and IoT.
-            </p>
+    <p>
+        Passionate about learning and building <b>VLSI circuits</b>.
+        I enjoy working on digital design, verification, and IoT.
+    </p>
 
-            <div class="hero-btns">
-                <a href="about.html" class="btn primary-btn">View Portfolio</a>
-                <a href="contact.html" class="btn secondary-btn">Contact Me</a>
-
-                <!-- Resume Buttons -->
-                <a href="./resume.pdf" target="_blank" class="btn primary-btn">View Resume</a>
-                <a href="./resume.pdf" download class="btn secondary-btn">Download Resume</a>
-            </div>
-        </div>
-
-        <div class="profile-card">
-            <img src="./PSVRAMANA.jpg" alt="Profile Photo">
-        </div>
-
+    <!-- ✅ FIXED BUTTONS -->
+    <div class="hero-btns">
+        <a href="#" class="btn primary-btn">View Portfolio</a>
+        <a href="#" class="btn secondary-btn">Contact Me</a>
+        <a href="./resume.pdf" target="_blank" class="btn primary-btn">View Resume</a>
+        <a href="./resume.pdf" download class="btn secondary-btn">Download Resume</a>
     </div>
+</div>
+
+<div class="profile-card">
+    <img src="./PSVRAMANA.jpg">
+</div>
+
+</div>
 </section>
-
-<script>
-const roles = ['VLSI Learner','Digital Designer','IoT Explorer'];
-let i=0,j=0,del=false;
-
-function type(){
-    let el=document.getElementById("typewriter");
-    if(!el) return;
-
-    let word=roles[i];
-    el.textContent=word.substring(0,j);
-
-    if(!del){ j++; if(j>word.length){ del=true; setTimeout(type,1000); return; }}
-    else{ j--; if(j==0){ del=false; i=(i+1)%roles.length; }}
-
-    setTimeout(type, del?50:100);
-}
-</script>
 
 </body>
 </html>
