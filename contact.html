@@ -35,7 +35,6 @@
       padding:40px 20px;
     }
 
-    /* HERO */
     .hero{
       text-align:center;
       margin-bottom:50px;
@@ -57,7 +56,6 @@
       font-size:1.1rem;
     }
 
-    /* GRID */
     .main-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
@@ -65,7 +63,6 @@
       margin-top:40px;
     }
 
-    /* LEFT PANEL */
     .left-panel{
       display:flex;
       flex-direction:column;
@@ -122,7 +119,6 @@
       line-height:1.6;
     }
 
-    /* SOCIAL */
     .social-grid{
       display:grid;
       grid-template-columns:repeat(4,1fr);
@@ -146,7 +142,6 @@
       transform:scale(1.05);
     }
 
-    /* FORM */
     .form-box h2{
       text-align:center;
       color:#38bdf8;
@@ -219,56 +214,6 @@
       color:#38bdf8;
     }
 
-    /* QUICK ACCESS */
-    .quick-section{
-      margin-top:70px;
-    }
-
-    .quick-title{
-      text-align:center;
-      font-size:2.5rem;
-      margin-bottom:30px;
-      color:#38bdf8;
-    }
-
-    .quick-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:25px;
-    }
-
-    .quick-card{
-      text-align:center;
-    }
-
-    .quick-card i{
-      font-size:3rem;
-      margin-bottom:18px;
-      background:linear-gradient(135deg,#38bdf8,#ec4899);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
-
-    .quick-card h3{
-      margin-bottom:10px;
-    }
-
-    .quick-card p{
-      color:#d1d5db;
-      margin-bottom:18px;
-      line-height:1.6;
-    }
-
-    .quick-card a{
-      display:inline-block;
-      padding:12px 22px;
-      border-radius:14px;
-      background:linear-gradient(135deg,#38bdf8,#6366f1);
-      color:white;
-      text-decoration:none;
-      font-weight:600;
-    }
-
     footer{
       margin-top:70px;
       text-align:center;
@@ -303,7 +248,7 @@
   <section class="hero">
     <h1>Let’s Connect</h1>
     <p>
-      Reach out for internships, VLSI projects, IoT collaborations, digital design opportunities, or direct communication through WhatsApp, Telegram, and Instagram.
+      Reach out for internships, VLSI projects, IoT collaborations, digital design opportunities, or direct communication.
     </p>
   </section>
 
@@ -349,15 +294,15 @@
 
       </div>
 
-      <!-- SOCIAL LINKS -->
+      <!-- SOCIAL -->
       <div class="card">
         <h3 style="text-align:center; color:#38bdf8;">Connect Socially</h3>
 
         <div class="social-grid">
           <a href="https://github.com/PSVRAMANA40248" target="_blank"><i class="fab fa-github"></i></a>
           <a href="https://www.linkedin.com/in/pusarla-sai-venkat-ramana-a44931300/" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a href="https://www.instagram.com/pusarla_ramana/" target="_blank"><i class="fab fa-instagram"></i></a>
           <a href="https://t.me/UNLUCKYBOY_2005" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.instagram.com/pusarla_ramana/" target="_blank"><i class="fab fa-instagram"></i></a>
         </div>
       </div>
 
@@ -396,8 +341,8 @@
         </button>
 
         <!-- Instagram -->
-        <button type="button" class="submit-btn instagram-btn" onclick="openInstagram()">
-          <i class="fab fa-instagram"></i> Open Instagram
+        <button type="button" class="submit-btn instagram-btn" onclick="sendInstagram()">
+          <i class="fab fa-instagram"></i> Send to Instagram
         </button>
 
         <p id="status-message"></p>
@@ -407,36 +352,6 @@
 
   </section>
 
-  <!-- QUICK ACCESS -->
-  <section class="quick-section">
-    <h2 class="quick-title">Quick Access</h2>
-
-    <div class="quick-grid">
-
-      <div class="quick-card">
-        <i class="fab fa-telegram"></i>
-        <h3>Telegram</h3>
-        <p>Fast technical communication and direct messaging.</p>
-        <a href="https://t.me/UNLUCKYBOY_2005" target="_blank">Open</a>
-      </div>
-
-      <div class="quick-card">
-        <i class="fab fa-instagram"></i>
-        <h3>Instagram</h3>
-        <p>Connect through Instagram profile and updates.</p>
-        <a href="https://www.instagram.com/pusarla_ramana/" target="_blank">Visit</a>
-      </div>
-
-      <div class="quick-card">
-        <i class="fas fa-file-download"></i>
-        <h3>Resume</h3>
-        <p>Download full CV with technical projects and skills.</p>
-        <a href="https://raw.githubusercontent.com/PSVRAMANA40248/Portfoilo/main/Ramana_resume.pdf" target="_blank">Download</a>
-      </div>
-
-    </div>
-  </section>
-
   <footer>
     © 2026 P. Sai Venkat Ramana | Future VLSI Engineer
   </footer>
@@ -444,6 +359,9 @@
 </div>
 
 <script>
+  const TELEGRAM_USERNAME = "UNLUCKYBOY_2005";
+  const INSTAGRAM_USERNAME = "pusarla_ramana";
+
   function getFormData() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
@@ -456,52 +374,55 @@
       return null;
     }
 
-    return {
-      name,
-      email,
-      subject,
-      message
-    };
+    return `Hello P. Sai Venkat Ramana,
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message}`;
   }
 
   /* WhatsApp */
   function sendWhatsApp() {
-    const data = getFormData();
-    if (!data) return;
+    const text = getFormData();
+    if (!text) return;
 
-    const text =
-      `Hello P. Sai Venkat Ramana,%0A%0A` +
-      `Name: ${encodeURIComponent(data.name)}%0A` +
-      `Email: ${encodeURIComponent(data.email)}%0A` +
-      `Subject: ${encodeURIComponent(data.subject)}%0A%0A` +
-      `Message:%0A${encodeURIComponent(data.message)}`;
-
-    const url = `https://wa.me/919182709036?text=${text}`;
+    const url = `https://wa.me/919182709036?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
 
     document.getElementById("status-message").style.color = "#25D366";
-    document.getElementById("status-message").innerText = "Opening WhatsApp...";
+    document.getElementById("status-message").innerText =
+      "Opening WhatsApp...";
   }
 
   /* Telegram */
   function sendTelegram() {
-    const data = getFormData();
-    if (!data) return;
+    const text = getFormData();
+    if (!text) return;
 
-    window.open("https://t.me/UNLUCKYBOY_2005", "_blank");
+    navigator.clipboard.writeText(text);
+
+    window.open(`https://t.me/${TELEGRAM_USERNAME}`, "_blank");
 
     document.getElementById("status-message").style.color = "#229ED9";
     document.getElementById("status-message").innerText =
-      "Opening Telegram profile. Copy your message and send directly.";
+      "Message copied. Paste it into Telegram chat with @UNLUCKYBOY_2005";
   }
 
   /* Instagram */
-  function openInstagram() {
-    window.open("https://www.instagram.com/pusarla_ramana/", "_blank");
+  function sendInstagram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(`https://www.instagram.com/${INSTAGRAM_USERNAME}/`, "_blank");
 
     document.getElementById("status-message").style.color = "#ec4899";
     document.getElementById("status-message").innerText =
-      "Opening Instagram profile...";
+      "Message copied. Opened Instagram profile @pusarla_ramana — paste in DM.";
   }
 </script>
 
