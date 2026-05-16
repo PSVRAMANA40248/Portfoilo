@@ -46,7 +46,6 @@
       padding:40px 20px;
     }
 
-    /* HERO */
     .hero{
       text-align:center;
       margin-bottom:50px;
@@ -68,14 +67,12 @@
       line-height:1.7;
     }
 
-    /* GRID */
     .main-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
       gap:40px;
     }
 
-    /* CARDS */
     .card, .form-box, .quick-card{
       background:rgba(255,255,255,0.06);
       border:1px solid rgba(255,255,255,0.08);
@@ -97,7 +94,6 @@
       gap:25px;
     }
 
-    /* INFO */
     .info-row{
       display:flex;
       gap:15px;
@@ -128,7 +124,6 @@
       line-height:1.6;
     }
 
-    /* SOCIAL */
     .social-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -152,7 +147,6 @@
       transform:scale(1.05);
     }
 
-    /* FORM */
     .form-box h2{
       text-align:center;
       color:#38bdf8;
@@ -214,7 +208,6 @@
       font-weight:600;
     }
 
-    /* QUICK ACCESS */
     .quick-section{
       margin-top:60px;
     }
@@ -271,7 +264,6 @@
       font-size:0.95rem;
     }
 
-    /* MOBILE */
     @media(max-width:992px){
       .main-grid{
         grid-template-columns:1fr;
@@ -293,11 +285,12 @@
 </head>
 <body>
 
+<!-- IMPORTANT:
+REPLACE THESE WITH YOUR ACTUAL EMAILJS VALUES
+-->
 <script>
-  /* EMAILJS INIT */
   (function(){
     emailjs.init("YOUR_PUBLIC_KEY");
-    /* Replace with your EmailJS Public Key */
   })();
 </script>
 
@@ -317,7 +310,6 @@
     <!-- LEFT PANEL -->
     <div class="left-panel">
 
-      <!-- CONTACT INFO -->
       <div class="card">
 
         <div class="info-row">
@@ -346,7 +338,6 @@
 
       </div>
 
-      <!-- SOCIAL -->
       <div class="card">
         <h3 style="text-align:center; color:#38bdf8;">Connect Socially</h3>
 
@@ -381,14 +372,14 @@
           <textarea id="message" name="message" placeholder="Your Message..." required></textarea>
         </div>
 
-        <!-- Gmail Button -->
+        <!-- Gmail -->
         <button type="submit" class="submit-btn">
           <i class="fas fa-paper-plane"></i> Send to Gmail
         </button>
 
-        <!-- WhatsApp Button -->
-        <button 
-          type="button" 
+        <!-- WhatsApp -->
+        <button
+          type="button"
           class="submit-btn"
           style="background:linear-gradient(135deg,#25D366,#128C7E);"
           onclick="sendWhatsAppMessage()"
@@ -433,14 +424,12 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     © 2026 P. Sai Venkat Ramana | Future VLSI Engineer
   </footer>
 
 </div>
 
-<!-- EMAIL + WHATSAPP SCRIPT -->
 <script>
   const contactForm = document.getElementById("contact-form");
   const statusMessage = document.getElementById("status-message");
@@ -450,22 +439,23 @@
     event.preventDefault();
 
     statusMessage.style.color = "#38bdf8";
-    statusMessage.textContent = "Sending to Gmail...";
+    statusMessage.textContent = "Sending to psvr120205@gmail.com...";
 
     emailjs.sendForm(
-      "YOUR_SERVICE_ID",      // Replace with EmailJS Service ID
-      "YOUR_TEMPLATE_ID",     // Replace with EmailJS Template ID
+      "YOUR_SERVICE_ID",
+      "YOUR_TEMPLATE_ID",
       this
     )
-    .then(function(){
+    .then(function(response){
+      console.log("SUCCESS!", response.status, response.text);
       statusMessage.style.color = "#22c55e";
       statusMessage.textContent = "Message sent successfully to psvr120205@gmail.com!";
       contactForm.reset();
     })
     .catch(function(error){
+      console.error("FAILED...", error);
       statusMessage.style.color = "#ef4444";
-      statusMessage.textContent = "Failed to send Gmail message.";
-      console.error("EmailJS Error:", error);
+      statusMessage.textContent = "Failed to send Gmail. Check EmailJS Public Key, Service ID, and Template ID.";
     });
   });
 
@@ -499,18 +489,30 @@
 </script>
 
 <!--
-EMAILJS SETUP:
-1. Create EmailJS account
-2. Connect Gmail: psvr120205@gmail.com
-3. Template:
-   Name: {{from_name}}
-   Email: {{from_email}}
-   Subject: {{subject}}
-   Message: {{message}}
+=====================================
+EMAILJS SETUP FOR psvr120205@gmail.com
+=====================================
+
+1. Go to EmailJS
+2. Add Gmail Service using:
+   psvr120205@gmail.com
+
+3. Create Email Template:
+-------------------------------------
+From Name: {{from_name}}
+From Email: {{from_email}}
+Subject: {{subject}}
+
+Message:
+{{message}}
+-------------------------------------
+
 4. Replace:
    YOUR_PUBLIC_KEY
    YOUR_SERVICE_ID
    YOUR_TEMPLATE_ID
+
+WITHOUT these values Gmail will fail.
 -->
 
 </body>
