@@ -1,19 +1,378 @@
-<!-- Replace your existing hero-btns section with this -->
-<div class="hero-btns">
-    <a href="about.html" class="btn primary-btn">View Portfolio</a>
-    <a href="contact.html" class="btn secondary-btn">Contact Me</a>
-    <a href="resume.pdf" target="_blank" class="btn resume-btn">Click Resume</a>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | P.SAI VENKAT RAMANA</title>
 
-<!-- Add this CSS inside your <style> section -->
-.resume-btn {
-    background: linear-gradient(90deg, #633BCE, #11C0E2);
-    color: #fff;
-    border: none;
-}
-.resume-btn:hover {
-    background: linear-gradient(270deg, #11C0E2, #633BCE);
-    color: #fff;
-    transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 6px 22px rgba(99, 59, 206, 0.18);
-}
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Fira+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --main-bg: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            --glass-bg: rgba(255,255,255,0.25);
+            --glass-blur: blur(13px);
+            --accent: #605DFF;
+            --accent2: #11C0E2;
+            --accent3: #633BCE;
+            --font-main: 'Montserrat', sans-serif;
+            --font-mono: 'Fira Mono', monospace;
+            --header-height: 75px;
+            --border-radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: var(--font-main);
+            background: var(--main-bg);
+            color: #21243c;
+        }
+
+        /* ---------- HEADER ---------- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            height: var(--header-height);
+            box-shadow: 0 8px 32px 0 rgba(60,60,60,0.06);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .logo h2 {
+            font-family: var(--font-mono);
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 32px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-mono);
+            color: #3a406a;
+            text-decoration: none;
+            font-size: 1.05rem;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* ---------- HERO SECTION ---------- */
+        .hero {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: var(--header-height);
+            background: linear-gradient(135deg, #f7f8fd 45%, #e6eaff 100%);
+        }
+
+        .hero-inner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 55px;
+            max-width: 1200px;
+            width: 90%;
+        }
+
+        .hero-text {
+            flex-basis: 450px;
+            min-width: 285px;
+            padding: 38px 30px;
+            border-radius: var(--border-radius);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            box-shadow: 0 4px 32px rgba(30,40,90,0.13);
+        }
+
+        .hero-text h4 {
+            color: var(--accent2);
+            font-family: var(--font-mono);
+            margin-bottom: 10px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #373e8f;
+        }
+
+        .hero-text .typewriter-container {
+            min-height: 30px;
+            color: var(--accent3);
+            font-family: var(--font-mono);
+            font-size: 1.22rem;
+            margin-bottom: 15px;
+        }
+
+        .hero-text p {
+            color: #465174;
+            line-height: 1.75;
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            font-family: var(--font-mono);
+            padding: 14px 28px;
+            font-size: 1rem;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: white;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: var(--accent);
+            border: 2px solid var(--accent2);
+        }
+
+        .secondary-btn:hover {
+            background: var(--accent2);
+            color: white;
+        }
+
+        /* NEW RESUME BUTTON */
+        .resume-btn {
+            background: linear-gradient(90deg, #633BCE, #11C0E2);
+            color: white;
+        }
+
+        .resume-btn:hover {
+            background: linear-gradient(270deg, #11C0E2, #633BCE);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 22px rgba(99, 59, 206, 0.18);
+        }
+
+        /* HERO IMAGE */
+        .hero-img-container {
+            flex-basis: 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-card {
+            width: 330px;
+            height: 420px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(85, 53, 255, 0.09);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            transition: 0.3s;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.04);
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* TYPEWRITER CURSOR */
+        .typewriter-cursor {
+            display: inline-block;
+            background: var(--accent3);
+            width: 2.5px;
+            height: 1.13em;
+            margin-left: 4px;
+            animation: blink 0.85s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 990px) {
+            .hero-inner {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 670px) {
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .logo h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .profile-card {
+                width: 90%;
+                height: 340px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <h2>My Portfolio</h2>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skill.html">Skills</a></li>
+                <li><a href="project.html">Projects</a></li>
+                <li><a href="Specialtalent.html">Special Talent</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-inner">
+
+            <!-- TEXT -->
+            <div class="hero-text">
+                <h4>Hello and Welcome</h4>
+                <h1>P.SAI<br>VENKAT RAMANA</h1>
+
+                <div class="typewriter-container">
+                    I am a <span id="typewriter"></span><span class="typewriter-cursor"></span>
+                </div>
+
+                <p>
+                    Passionate about learning and building <strong>VLSI circuits</strong>.
+                    I enjoy working on practical projects and improving my skills in
+                    <strong>digital design, verification, and IoT</strong>.
+                </p>
+
+                <div class="hero-btns">
+                    <a href="about.html" class="btn primary-btn">View Portfolio</a>
+                    <a href="contact.html" class="btn secondary-btn">Contact Me</a>
+                    <a href="resume.pdf" target="_blank" class="btn resume-btn">Click Resume</a>
+                </div>
+            </div>
+
+            <!-- IMAGE -->
+            <div class="hero-img-container">
+                <div class="profile-card">
+                    <img src="./PSVRAMANA.jpg" alt="PSVRAMANA Profile Photo">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TYPEWRITER SCRIPT -->
+    <script>
+        const typewriter = document.getElementById('typewriter');
+
+        const roles = [
+            'VLSI Learner',
+            'Digital Design Enthusiast',
+            'IoT Explorer'
+        ];
+
+        let phraseIdx = 0,
+            charIdx = 0,
+            del = false;
+
+        function typeLoop() {
+            let word = roles[phraseIdx];
+
+            if (!del) {
+                typewriter.textContent = word.substring(0, charIdx + 1);
+                charIdx++;
+
+                if (charIdx === word.length) {
+                    del = true;
+                    setTimeout(typeLoop, 1300);
+                    return;
+                }
+
+            } else {
+                typewriter.textContent = word.substring(0, charIdx - 1);
+                charIdx--;
+
+                if (charIdx === 0) {
+                    del = false;
+                    phraseIdx = (phraseIdx + 1) % roles.length;
+                    setTimeout(typeLoop, 600);
+                    return;
+                }
+            }
+
+            setTimeout(typeLoop, !del ? 80 : 32);
+        }
+
+        document.addEventListener('DOMContentLoaded', typeLoop);
+    </script>
+
+</body>
+</html>
