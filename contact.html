@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | P. Sai Venkat Ramana</title>
 
-  <!-- Fonts -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
     *{
@@ -24,10 +27,8 @@
       background:#111827;
       color:#fff;
       overflow-x:hidden;
-      margin:0;
     }
 
-    /* BACKGROUND */
     body::before{
       content:'';
       position:fixed;
@@ -41,23 +42,18 @@
 
     .container{
       max-width:1400px;
-      width:100%;
       margin:auto;
-      padding:40px 30px;
+      padding:40px 20px;
     }
 
     /* HERO */
     .hero{
       text-align:center;
       margin-bottom:50px;
-      width:100%;
     }
 
     .hero h1{
       font-size:clamp(2.5rem, 6vw, 5rem);
-      font-weight:700;
-      line-height:1.1;
-      word-break:break-word;
       background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
@@ -65,58 +61,47 @@
     }
 
     .hero p{
-      max-width:750px;
-      margin:15px auto 0;
+      max-width:800px;
+      margin:auto;
       color:#d1d5db;
-      font-size:clamp(1rem, 2vw, 1.25rem);
-      line-height:1.6;
-      padding:0 10px;
+      font-size:1.1rem;
+      line-height:1.7;
     }
 
-    /* MAIN GRID */
+    /* GRID */
     .main-grid{
       display:grid;
-      grid-template-columns:repeat(2, minmax(320px, 1fr));
+      grid-template-columns:repeat(2,1fr);
       gap:40px;
-      align-items:start;
-      width:100%;
     }
 
-    /* LEFT SIDE */
-    .left-panel{
-      display:flex;
-      flex-direction:column;
-      gap:25px;
-      width:100%;
-    }
-
-    .card{
-      width:100%;
+    /* CARDS */
+    .card, .form-box, .quick-card{
       background:rgba(255,255,255,0.06);
       border:1px solid rgba(255,255,255,0.08);
       border-radius:24px;
       padding:25px;
       backdrop-filter:blur(18px);
       transition:0.4s;
-      overflow:hidden;
     }
 
-    .card:hover{
+    .card:hover, .form-box:hover, .quick-card:hover{
       transform:translateY(-8px);
       border-color:#38bdf8;
       box-shadow:0 15px 40px rgba(56,189,248,0.15);
     }
 
-    .info-row{
+    .left-panel{
       display:flex;
-      align-items:flex-start;
-      gap:15px;
-      flex-wrap:wrap;
-      margin-bottom:18px;
+      flex-direction:column;
+      gap:25px;
     }
 
-    .info-row:last-child{
-      margin-bottom:0;
+    /* INFO */
+    .info-row{
+      display:flex;
+      gap:15px;
+      margin-bottom:18px;
     }
 
     .icon-box{
@@ -131,32 +116,24 @@
       flex-shrink:0;
     }
 
-    .info-text{
-      flex:1;
-      min-width:180px;
-    }
-
     .info-text h3{
-      font-size:1.1rem;
-      margin-bottom:6px;
       color:#38bdf8;
+      margin-bottom:5px;
     }
 
     .info-text p,
     .info-text a{
       color:#e5e7eb;
       text-decoration:none;
-      font-size:0.95rem;
-      line-height:1.5;
-      word-break:break-word;
+      line-height:1.6;
     }
 
     /* SOCIAL */
     .social-grid{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:15px;
-      margin-top:10px;
+      margin-top:15px;
     }
 
     .social-grid a{
@@ -166,8 +143,8 @@
       background:rgba(255,255,255,0.05);
       color:#fff;
       font-size:1.4rem;
-      transition:0.3s;
       text-decoration:none;
+      transition:0.3s;
     }
 
     .social-grid a:hover{
@@ -176,23 +153,11 @@
     }
 
     /* FORM */
-    .form-box{
-      width:100%;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:24px;
-      padding:30px;
-      backdrop-filter:blur(18px);
-      overflow:hidden;
-    }
-
     .form-box h2{
       text-align:center;
-      margin-bottom:25px;
       color:#38bdf8;
-      font-size:clamp(1.8rem, 4vw, 3rem);
-      line-height:1.2;
-      word-break:break-word;
+      margin-bottom:25px;
+      font-size:2rem;
     }
 
     .input-group{
@@ -235,6 +200,7 @@
       font-weight:700;
       cursor:pointer;
       transition:0.4s;
+      margin-bottom:12px;
     }
 
     .submit-btn:hover{
@@ -242,38 +208,32 @@
       box-shadow:0 15px 30px rgba(99,102,241,0.35);
     }
 
-    /* QUICK ACTIONS */
+    #status-message{
+      margin-top:15px;
+      text-align:center;
+      font-weight:600;
+    }
+
+    /* QUICK ACCESS */
     .quick-section{
       margin-top:60px;
-      width:100%;
     }
 
     .quick-title{
       text-align:center;
-      font-size:clamp(2rem, 5vw, 3rem);
+      font-size:2.5rem;
       margin-bottom:30px;
       color:#38bdf8;
     }
 
     .quick-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:25px;
-      width:100%;
     }
 
     .quick-card{
-      padding:30px;
       text-align:center;
-      border-radius:22px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.08);
-      transition:0.4s;
-    }
-
-    .quick-card:hover{
-      transform:translateY(-10px);
-      background:rgba(255,255,255,0.1);
     }
 
     .quick-card i{
@@ -286,7 +246,6 @@
 
     .quick-card h3{
       margin-bottom:10px;
-      font-size:1.3rem;
     }
 
     .quick-card p{
@@ -305,7 +264,6 @@
       font-weight:600;
     }
 
-    /* FOOTER */
     footer{
       margin-top:70px;
       text-align:center;
@@ -313,34 +271,16 @@
       font-size:0.95rem;
     }
 
-    /* TABLET */
+    /* MOBILE */
     @media(max-width:992px){
       .main-grid{
         grid-template-columns:1fr;
       }
-
-      .hero{
-        margin-bottom:40px;
-      }
-
-      .left-panel,
-      .form-box{
-        width:100%;
-      }
     }
 
-    /* MOBILE */
     @media(max-width:768px){
-      .container{
-        padding:30px 15px;
-      }
-
       .social-grid{
-        grid-template-columns:repeat(3, minmax(60px,1fr));
-      }
-
-      .quick-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:repeat(3,1fr);
       }
 
       .info-row{
@@ -348,35 +288,18 @@
         align-items:center;
         text-align:center;
       }
-
-      .icon-box{
-        margin-bottom:10px;
-      }
-    }
-
-    /* EXTRA SMALL */
-    @media(max-width:480px){
-      .hero h1{
-        font-size:2.2rem;
-      }
-
-      .hero p{
-        font-size:0.95rem;
-      }
-
-      .form-box,
-      .card{
-        padding:20px;
-      }
-
-      .submit-btn{
-        font-size:0.95rem;
-        padding:14px;
-      }
     }
   </style>
 </head>
 <body>
+
+<script>
+  /* EMAILJS INIT */
+  (function(){
+    emailjs.init("YOUR_PUBLIC_KEY");
+    /* Replace with your EmailJS Public Key */
+  })();
+</script>
 
 <div class="container">
 
@@ -384,17 +307,19 @@
   <section class="hero">
     <h1>Let’s Build Together</h1>
     <p>
-      Open to internships, VLSI opportunities, digital design collaborations, IoT innovation, and technical networking.
+      Contact me directly through Gmail or WhatsApp for internships, VLSI opportunities, digital design, IoT projects, and collaborations.
     </p>
   </section>
 
-  <!-- MAIN -->
+  <!-- MAIN GRID -->
   <section class="main-grid">
 
-    <!-- LEFT -->
+    <!-- LEFT PANEL -->
     <div class="left-panel">
 
+      <!-- CONTACT INFO -->
       <div class="card">
+
         <div class="info-row">
           <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
           <div class="info-text">
@@ -406,7 +331,7 @@
         <div class="info-row">
           <div class="icon-box"><i class="fas fa-envelope"></i></div>
           <div class="info-text">
-            <h3>Email</h3>
+            <h3>Gmail</h3>
             <a href="mailto:psvr120205@gmail.com">psvr120205@gmail.com</a>
           </div>
         </div>
@@ -418,10 +343,13 @@
             <a href="https://wa.me/919182709036" target="_blank">+91 9182709036</a>
           </div>
         </div>
+
       </div>
 
+      <!-- SOCIAL -->
       <div class="card">
-        <h3 style="margin-bottom:20px; text-align:center; color:#38bdf8;">Connect Socially</h3>
+        <h3 style="text-align:center; color:#38bdf8;">Connect Socially</h3>
+
         <div class="social-grid">
           <a href="https://github.com/PSVRAMANA40248" target="_blank"><i class="fab fa-github"></i></a>
           <a href="https://www.linkedin.com/in/pusarla-sai-venkat-ramana-a44931300/" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -431,35 +359,51 @@
 
     </div>
 
-    <!-- RIGHT -->
+    <!-- CONTACT FORM -->
     <div class="form-box">
       <h2>Contact Portal</h2>
-      <form>
+
+      <form id="contact-form">
+
         <div class="input-group">
-          <input type="text" placeholder="Full Name" required>
+          <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
         </div>
 
         <div class="input-group">
-          <input type="email" placeholder="Email Address" required>
+          <input type="email" id="from_email" name="from_email" placeholder="Email Address" required>
         </div>
 
         <div class="input-group">
-          <input type="text" placeholder="Subject">
+          <input type="text" id="subject" name="subject" placeholder="Subject" required>
         </div>
 
         <div class="input-group">
-          <textarea placeholder="Your Message..." required></textarea>
+          <textarea id="message" name="message" placeholder="Your Message..." required></textarea>
         </div>
 
+        <!-- Gmail Button -->
         <button type="submit" class="submit-btn">
-          <i class="fas fa-paper-plane"></i> Send Message
+          <i class="fas fa-paper-plane"></i> Send to Gmail
         </button>
+
+        <!-- WhatsApp Button -->
+        <button 
+          type="button" 
+          class="submit-btn"
+          style="background:linear-gradient(135deg,#25D366,#128C7E);"
+          onclick="sendWhatsAppMessage()"
+        >
+          <i class="fab fa-whatsapp"></i> Send to WhatsApp
+        </button>
+
+        <p id="status-message"></p>
+
       </form>
     </div>
 
   </section>
 
-  <!-- QUICK ACTIONS -->
+  <!-- QUICK ACCESS -->
   <section class="quick-section">
     <h2 class="quick-title">Quick Access</h2>
 
@@ -495,6 +439,79 @@
   </footer>
 
 </div>
+
+<!-- EMAIL + WHATSAPP SCRIPT -->
+<script>
+  const contactForm = document.getElementById("contact-form");
+  const statusMessage = document.getElementById("status-message");
+
+  /* Gmail Send */
+  contactForm.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    statusMessage.style.color = "#38bdf8";
+    statusMessage.textContent = "Sending to Gmail...";
+
+    emailjs.sendForm(
+      "YOUR_SERVICE_ID",      // Replace with EmailJS Service ID
+      "YOUR_TEMPLATE_ID",     // Replace with EmailJS Template ID
+      this
+    )
+    .then(function(){
+      statusMessage.style.color = "#22c55e";
+      statusMessage.textContent = "Message sent successfully to psvr120205@gmail.com!";
+      contactForm.reset();
+    })
+    .catch(function(error){
+      statusMessage.style.color = "#ef4444";
+      statusMessage.textContent = "Failed to send Gmail message.";
+      console.error("EmailJS Error:", error);
+    });
+  });
+
+  /* WhatsApp Send */
+  function sendWhatsAppMessage() {
+    const name = document.getElementById("from_name").value;
+    const email = document.getElementById("from_email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    if (!name || !email || !subject || !message) {
+      statusMessage.style.color = "#ef4444";
+      statusMessage.textContent = "Please fill all fields before sending to WhatsApp.";
+      return;
+    }
+
+    const whatsappMessage =
+      `Hello P. Sai Venkat Ramana,%0A%0A` +
+      `Name: ${encodeURIComponent(name)}%0A` +
+      `Email: ${encodeURIComponent(email)}%0A` +
+      `Subject: ${encodeURIComponent(subject)}%0A%0A` +
+      `Message:%0A${encodeURIComponent(message)}`;
+
+    const whatsappURL = `https://wa.me/919182709036?text=${whatsappMessage}`;
+
+    window.open(whatsappURL, "_blank");
+
+    statusMessage.style.color = "#25D366";
+    statusMessage.textContent = "Redirecting to WhatsApp...";
+  }
+</script>
+
+<!--
+EMAILJS SETUP:
+1. Create EmailJS account
+2. Connect Gmail: psvr120205@gmail.com
+3. Template:
+   Name: {{from_name}}
+   Email: {{from_email}}
+   Subject: {{subject}}
+   Message: {{message}}
+4. Replace:
+   YOUR_PUBLIC_KEY
+   YOUR_SERVICE_ID
+   YOUR_TEMPLATE_ID
+-->
 
 </body>
 </html>
