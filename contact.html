@@ -1,3 +1,1870 @@
+
+
+image(1).png
+WHAT ARE THSES
+
+Those are your navigation menu items (navbar tabs/buttons) in the portfolio header:
+
+Home → Main landing page
+
+About → Your personal introduction / profile section
+
+Skills → Technical + soft skills section
+
+Projects → Your project showcase
+
+Special Talent → Extra strengths (leadership, creativity, certifications, achievements)
+
+Contact → Ways to reach you (WhatsApp, Instagram, Telegram, Email)
+
+Why “About” looks different:
+The About tab has a border box around it, which means it’s likely the currently active/selected page.
+
+In your code, this is usually controlled by:
+nav a.active {
+  border: 2px solid black;
+}
+If you want the active tab to look like Home instead:
+Use:
+
+nav a.active {
+  color: #4c56ff;
+  border-bottom: 2px solid #4c56ff;
+}
+Simple meaning:
+These are basically your website’s menu buttons used to move between sections/pages.
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | P. Sai Venkat Ramana</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Space Grotesk',sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(236,72,153,0.18), transparent 40%),
+        #111827;
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.5rem,6vw,5rem);
+      margin-bottom:15px;
+      background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:750px;
+      margin:auto;
+      color:#d1d5db;
+      line-height:1.7;
+      font-size:1.1rem;
+    }
+
+    .main-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:40px;
+      margin-top:40px;
+    }
+
+    .left-panel{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .card,
+    .form-box,
+    .quick-card{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:24px;
+      padding:25px;
+      backdrop-filter:blur(18px);
+      transition:0.4s;
+    }
+
+    .card:hover,
+    .form-box:hover,
+    .quick-card:hover{
+      transform:translateY(-8px);
+      border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.15);
+    }
+
+    .info-row{
+      display:flex;
+      gap:15px;
+      margin-bottom:18px;
+      align-items:center;
+    }
+
+    .icon-box{
+      width:55px;
+      height:55px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#38bdf8,#6366f1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      flex-shrink:0;
+    }
+
+    .info-text h3{
+      color:#38bdf8;
+      margin-bottom:5px;
+    }
+
+    .info-text p,
+    .info-text a{
+      color:#e5e7eb;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+      margin-top:15px;
+    }
+
+    .social-grid a{
+      padding:18px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      color:#fff;
+      font-size:1.4rem;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .social-grid a:hover{
+      background:linear-gradient(135deg,#38bdf8,#a855f7);
+      transform:scale(1.05);
+    }
+
+    .form-box h2{
+      text-align:center;
+      color:#38bdf8;
+      margin-bottom:25px;
+      font-size:2rem;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    .input-group input,
+    .input-group textarea{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:14px;
+      background:rgba(255,255,255,0.07);
+      color:white;
+      outline:none;
+      font-size:1rem;
+      border:1px solid transparent;
+      transition:0.3s;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus{
+      border-color:#38bdf8;
+      box-shadow:0 0 15px rgba(56,189,248,0.2);
+    }
+
+    .input-group textarea{
+      min-height:140px;
+      resize:none;
+    }
+
+    .submit-btn{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:16px;
+      color:white;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.4s;
+      margin-bottom:12px;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .whatsapp-btn{
+      background:linear-gradient(135deg,#25D366,#128C7E);
+    }
+
+    .telegram-btn{
+      background:linear-gradient(135deg,#229ED9,#1d4ed8);
+    }
+
+    .instagram-btn{
+      background:linear-gradient(135deg,#f97316,#ec4899,#9333ea);
+    }
+
+    #status-message{
+      margin-top:15px;
+      text-align:center;
+      font-weight:600;
+      color:#38bdf8;
+    }
+
+    footer{
+      margin-top:70px;
+      text-align:center;
+      color:#9ca3af;
+      font-size:0.95rem;
+    }
+
+    @media(max-width:992px){
+      .main-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:768px){
+      .social-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .info-row{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Let’s Connect</h1>
+    <p>
+      Reach out for internships, VLSI projects, IoT collaborations, digital design opportunities, or direct communication.
+    </p>
+  </section>
+
+  <!-- MAIN GRID -->
+  <section class="main-grid">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+      <div class="card">
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="info-text">
+            <h3>Location</h3>
+            <p>Vaddeswaram, Andhra Pradesh, India</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+          <div class="info-text">
+            <h3>WhatsApp</h3>
+            <a href="https://wa.me/919182709036" target="_blank">+91 9182709036</a>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-telegram"></i></div>
+          <div class="info-text">
+            <h3>Telegram</h3>
+            <a href="https://t.me/UNLUCKYBOY_2005" target="_blank">@UNLUCKYBOY_2005</a>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-instagram"></i></div>
+          <div class="info-text">
+            <h3>Instagram</h3>
+            <a href="https://www.instagram.com/pusarla_ramana/" target="_blank">@pusarla_ramana</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="card">
+        <h3 style="text-align:center; color:#38bdf8;">Connect Socially</h3>
+
+        <div class="social-grid">
+          <a href="https://github.com/PSVRAMANA40248" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/pusarla-sai-venkat-ramana-a44931300/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://t.me/UNLUCKYBOY_2005" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.instagram.com/pusarla_ramana/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="form-box">
+      <h2>Contact Portal</h2>
+
+      <form id="contact-form">
+
+        <div class="input-group">
+          <input type="text" id="name" placeholder="Full Name" required>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Your Email" required>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="subject" placeholder="Subject" required>
+        </div>
+
+        <div class="input-group">
+          <textarea id="message" placeholder="Your Message..." required></textarea>
+        </div>
+
+        <!-- WhatsApp -->
+        <button type="button" class="submit-btn whatsapp-btn" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> Send to WhatsApp
+        </button>
+
+        <!-- Telegram -->
+        <button type="button" class="submit-btn telegram-btn" onclick="sendTelegram()">
+          <i class="fab fa-telegram"></i> Send to Telegram
+        </button>
+
+        <!-- Instagram -->
+        <button type="button" class="submit-btn instagram-btn" onclick="sendInstagram()">
+          <i class="fab fa-instagram"></i> Send to Instagram
+        </button>
+
+        <p id="status-message"></p>
+
+      </form>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 P. Sai Venkat Ramana | Future VLSI Engineer
+  </footer>
+
+</div>
+
+<script>
+  const TELEGRAM_USERNAME = "UNLUCKYBOY_2005";
+  const INSTAGRAM_USERNAME = "pusarla_ramana";
+
+  function getFormData() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    if (!name || !email || !subject || !message) {
+      document.getElementById("status-message").style.color = "#ef4444";
+      document.getElementById("status-message").innerText = "Please fill all fields!";
+      return null;
+    }
+
+    return Hello P. Sai Venkat Ramana,
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message};
+  }
+
+  /* WhatsApp */
+  function sendWhatsApp() {
+    const text = getFormData();
+    if (!text) return;
+
+    const url = https://wa.me/919182709036?text=${encodeURIComponent(text)};
+    window.open(url, "_blank");
+
+    document.getElementById("status-message").style.color = "#25D366";
+    document.getElementById("status-message").innerText =
+      "Opening WhatsApp...";
+  }
+
+  /* Telegram */
+  function sendTelegram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://t.me/${TELEGRAM_USERNAME}, "_blank");
+
+    document.getElementById("status-message").style.color = "#229ED9";
+    document.getElementById("status-message").innerText =
+      "Message copied. Paste it into Telegram chat with @UNLUCKYBOY_2005";
+  }
+
+  /* Instagram */
+  function sendInstagram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://www.instagram.com/${INSTAGRAM_USERNAME}/, "_blank");
+
+    document.getElementById("status-message").style.color = "#ec4899";
+    document.getElementById("status-message").innerText =
+      "Message copied. Opened Instagram profile @pusarla_ramana — paste in DM.";
+  }
+</script>
+
+</body>
+</html>
+
+EXCEPT CONTACT ADD REMAINING NAV
+
+<!-- ADD THIS NAVBAR RIGHT AFTER <body> TAG -->
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="special-talent.html" class="nav-link">Special Talent</a>
+    <a href="contact.html" class="nav-link active">Contact</a>
+  </div>
+</nav>
+
+<style>
+/* NAVBAR */
+.navbar{
+  width:100%;
+  padding:20px 0;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:35px;
+  flex-wrap:wrap;
+  padding:0 20px;
+}
+
+.nav-link{
+  color:#d1d5db;
+  text-decoration:none;
+  font-size:1.15rem;
+  font-weight:500;
+  padding:10px 18px;
+  border-radius:14px;
+  transition:0.3s ease;
+  position:relative;
+}
+
+.nav-link:hover{
+  color:#fff;
+  background:rgba(56,189,248,0.15);
+  transform:translateY(-2px);
+}
+
+.nav-link.active{
+  color:#38bdf8;
+  border:2px solid #38bdf8;
+  background:rgba(56,189,248,0.08);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .nav-container{
+    gap:15px;
+  }
+
+  .nav-link{
+    font-size:1rem;
+    padding:8px 14px;
+  }
+}
+</style>
+
+EXCEPT CONTACT
+
+<!-- ADD THIS NAVBAR RIGHT AFTER <body> TAG -->
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="special-talent.html" class="nav-link">Special Talent</a>
+  </div>
+</nav>
+
+<style>
+/* NAVBAR */
+.navbar{
+  width:100%;
+  padding:20px 0;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:35px;
+  flex-wrap:wrap;
+  padding:0 20px;
+}
+
+.nav-link{
+  color:#d1d5db;
+  text-decoration:none;
+  font-size:1.15rem;
+  font-weight:500;
+  padding:10px 18px;
+  border-radius:14px;
+  transition:0.3s ease;
+}
+
+.nav-link:hover{
+  color:#fff;
+  background:rgba(56,189,248,0.15);
+  transform:translateY(-2px);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .nav-container{
+    gap:15px;
+  }
+
+  .nav-link{
+    font-size:1rem;
+    padding:8px 14px;
+  }
+}
+</style>
+
+FULL CODE
+
+<!-- PLACE THIS FULL NAVBAR CODE IMMEDIATELY AFTER <body> -->
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="special-talent.html" class="nav-link">Special Talent</a>
+  </div>
+</nav>
+
+<style>
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Space Grotesk',sans-serif;
+}
+
+/* BODY */
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(236,72,153,0.18), transparent 40%),
+    #111827;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* NAVBAR */
+.navbar{
+  width:100%;
+  padding:20px 0;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:35px;
+  flex-wrap:wrap;
+  padding:0 20px;
+}
+
+.nav-link{
+  color:#d1d5db;
+  text-decoration:none;
+  font-size:1.15rem;
+  font-weight:500;
+  padding:10px 18px;
+  border-radius:14px;
+  transition:0.3s ease;
+  position:relative;
+}
+
+.nav-link:hover{
+  color:#fff;
+  background:rgba(56,189,248,0.15);
+  transform:translateY(-2px);
+}
+
+/* OPTIONAL ACTIVE PAGE */
+.nav-link.active{
+  color:#38bdf8;
+  border:2px solid #38bdf8;
+  background:rgba(56,189,248,0.08);
+}
+
+/* CONTAINER */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.hero h1{
+  font-size:clamp(2.5rem,6vw,5rem);
+  margin-bottom:15px;
+  background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  max-width:750px;
+  margin:auto;
+  color:#d1d5db;
+  line-height:1.7;
+  font-size:1.1rem;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .nav-container{
+    gap:15px;
+  }
+
+  .nav-link{
+    font-size:1rem;
+    padding:8px 14px;
+  }
+
+  .hero h1{
+    font-size:2.3rem;
+  }
+
+  .hero p{
+    font-size:1rem;
+  }
+}
+</style>
+
+FULL CODE 
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | P. Sai Venkat Ramana</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Space Grotesk',sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(236,72,153,0.18), transparent 40%),
+        #111827;
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.5rem,6vw,5rem);
+      margin-bottom:15px;
+      background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:750px;
+      margin:auto;
+      color:#d1d5db;
+      line-height:1.7;
+      font-size:1.1rem;
+    }
+
+    .main-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:40px;
+      margin-top:40px;
+    }
+
+    .left-panel{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .card,
+    .form-box,
+    .quick-card{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:24px;
+      padding:25px;
+      backdrop-filter:blur(18px);
+      transition:0.4s;
+    }
+
+    .card:hover,
+    .form-box:hover,
+    .quick-card:hover{
+      transform:translateY(-8px);
+      border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.15);
+    }
+
+    .info-row{
+      display:flex;
+      gap:15px;
+      margin-bottom:18px;
+      align-items:center;
+    }
+
+    .icon-box{
+      width:55px;
+      height:55px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#38bdf8,#6366f1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      flex-shrink:0;
+    }
+
+    .info-text h3{
+      color:#38bdf8;
+      margin-bottom:5px;
+    }
+
+    .info-text p,
+    .info-text a{
+      color:#e5e7eb;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+      margin-top:15px;
+    }
+
+    .social-grid a{
+      padding:18px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      color:#fff;
+      font-size:1.4rem;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .social-grid a:hover{
+      background:linear-gradient(135deg,#38bdf8,#a855f7);
+      transform:scale(1.05);
+    }
+
+    .form-box h2{
+      text-align:center;
+      color:#38bdf8;
+      margin-bottom:25px;
+      font-size:2rem;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    .input-group input,
+    .input-group textarea{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:14px;
+      background:rgba(255,255,255,0.07);
+      color:white;
+      outline:none;
+      font-size:1rem;
+      border:1px solid transparent;
+      transition:0.3s;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus{
+      border-color:#38bdf8;
+      box-shadow:0 0 15px rgba(56,189,248,0.2);
+    }
+
+    .input-group textarea{
+      min-height:140px;
+      resize:none;
+    }
+
+    .submit-btn{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:16px;
+      color:white;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.4s;
+      margin-bottom:12px;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .whatsapp-btn{
+      background:linear-gradient(135deg,#25D366,#128C7E);
+    }
+
+    .telegram-btn{
+      background:linear-gradient(135deg,#229ED9,#1d4ed8);
+    }
+
+    .instagram-btn{
+      background:linear-gradient(135deg,#f97316,#ec4899,#9333ea);
+    }
+
+    #status-message{
+      margin-top:15px;
+      text-align:center;
+      font-weight:600;
+      color:#38bdf8;
+    }
+
+    footer{
+      margin-top:70px;
+      text-align:center;
+      color:#9ca3af;
+      font-size:0.95rem;
+    }
+
+    @media(max-width:992px){
+      .main-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:768px){
+      .social-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .info-row{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Let’s Connect</h1>
+    <p>
+      Reach out for internships, VLSI projects, IoT collaborations, digital design opportunities, or direct communication.
+    </p>
+  </section>
+
+  <!-- MAIN GRID -->
+  <section class="main-grid">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+      <div class="card">
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="info-text">
+            <h3>Location</h3>
+            <p>Vaddeswaram, Andhra Pradesh, India</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+          <div class="info-text">
+            <h3>WhatsApp</h3>
+            <a href="https://wa.me/919182709036" target="_blank">+91 9182709036</a>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-telegram"></i></div>
+          <div class="info-text">
+            <h3>Telegram</h3>
+            <a href="https://t.me/UNLUCKYBOY_2005" target="_blank">@UNLUCKYBOY_2005</a>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-instagram"></i></div>
+          <div class="info-text">
+            <h3>Instagram</h3>
+            <a href="https://www.instagram.com/pusarla_ramana/" target="_blank">@pusarla_ramana</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="card">
+        <h3 style="text-align:center; color:#38bdf8;">Connect Socially</h3>
+
+        <div class="social-grid">
+          <a href="https://github.com/PSVRAMANA40248" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/pusarla-sai-venkat-ramana-a44931300/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://t.me/UNLUCKYBOY_2005" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.instagram.com/pusarla_ramana/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="form-box">
+      <h2>Contact Portal</h2>
+
+      <form id="contact-form">
+
+        <div class="input-group">
+          <input type="text" id="name" placeholder="Full Name" required>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Your Email" required>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="subject" placeholder="Subject" required>
+        </div>
+
+        <div class="input-group">
+          <textarea id="message" placeholder="Your Message..." required></textarea>
+        </div>
+
+        <!-- WhatsApp -->
+        <button type="button" class="submit-btn whatsapp-btn" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> Send to WhatsApp
+        </button>
+
+        <!-- Telegram -->
+        <button type="button" class="submit-btn telegram-btn" onclick="sendTelegram()">
+          <i class="fab fa-telegram"></i> Send to Telegram
+        </button>
+
+        <!-- Instagram -->
+        <button type="button" class="submit-btn instagram-btn" onclick="sendInstagram()">
+          <i class="fab fa-instagram"></i> Send to Instagram
+        </button>
+
+        <p id="status-message"></p>
+
+      </form>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 P. Sai Venkat Ramana | Future VLSI Engineer
+  </footer>
+
+</div>
+
+<script>
+  const TELEGRAM_USERNAME = "UNLUCKYBOY_2005";
+  const INSTAGRAM_USERNAME = "pusarla_ramana";
+
+  function getFormData() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    if (!name || !email || !subject || !message) {
+      document.getElementById("status-message").style.color = "#ef4444";
+      document.getElementById("status-message").innerText = "Please fill all fields!";
+      return null;
+    }
+
+    return Hello P. Sai Venkat Ramana,
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message};
+  }
+
+  /* WhatsApp */
+  function sendWhatsApp() {
+    const text = getFormData();
+    if (!text) return;
+
+    const url = https://wa.me/919182709036?text=${encodeURIComponent(text)};
+    window.open(url, "_blank");
+
+    document.getElementById("status-message").style.color = "#25D366";
+    document.getElementById("status-message").innerText =
+      "Opening WhatsApp...";
+  }
+
+  /* Telegram */
+  function sendTelegram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://t.me/${TELEGRAM_USERNAME}, "_blank");
+
+    document.getElementById("status-message").style.color = "#229ED9";
+    document.getElementById("status-message").innerText =
+      "Message copied. Paste it into Telegram chat with @UNLUCKYBOY_2005";
+  }
+
+  /* Instagram */
+  function sendInstagram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://www.instagram.com/${INSTAGRAM_USERNAME}/, "_blank");
+
+    document.getElementById("status-message").style.color = "#ec4899";
+    document.getElementById("status-message").innerText =
+      "Message copied. Opened Instagram profile @pusarla_ramana — paste in DM.";
+  }
+</script>
+
+</body>
+</html>
+
+FOR THIS CODE I NEED THE NAV NO CHANGE THE CODE
+
+<!-- ADD THIS ONLY BELOW <body> TAG -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="special-talent.html" class="nav-link">Special Talent</a>
+  </div>
+</nav>
+/* ADD THIS ONLY INSIDE YOUR EXISTING <style> TAG */
+.navbar{
+  width:100%;
+  padding:20px 0;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:35px;
+  flex-wrap:wrap;
+  padding:0 20px;
+}
+
+.nav-link{
+  color:#d1d5db;
+  text-decoration:none;
+  font-size:1.15rem;
+  font-weight:500;
+  padding:10px 18px;
+  border-radius:14px;
+  transition:0.3s ease;
+}
+
+.nav-link:hover{
+  color:#fff;
+  background:rgba(56,189,248,0.15);
+  transform:translateY(-2px);
+}
+
+@media(max-width:768px){
+  .nav-container{
+    gap:15px;
+  }
+
+  .nav-link{
+    font-size:1rem;
+    padding:8px 14px;
+  }
+}
+
+YOU ONLY GIVE THE FULL CODE
+
+<!-- ADD THIS INSIDE <body> TAG, IMMEDIATELY AFTER <body> -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="special-talent.html" class="nav-link">Special Talent</a>
+  </div>
+</nav>
+
+<style>
+.navbar{
+  width:100%;
+  padding:20px 0;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:35px;
+  flex-wrap:wrap;
+  padding:0 20px;
+}
+
+.nav-link{
+  color:#d1d5db;
+  text-decoration:none;
+  font-size:1.15rem;
+  font-weight:500;
+  padding:10px 18px;
+  border-radius:14px;
+  transition:0.3s ease;
+}
+
+.nav-link:hover{
+  color:#fff;
+  background:rgba(56,189,248,0.15);
+  transform:translateY(-2px);
+}
+
+@media(max-width:768px){
+  .nav-container{
+    gap:15px;
+  }
+
+  .nav-link{
+    font-size:1rem;
+    padding:8px 14px;
+  }
+}
+</style>
+
+FULL CODE NOT HALF CODE
+
+
+
+
+image(2).png
+WHERE IS THIS
+
+That screenshot is showing only your Contact Form section (right panel / .form-box), not the full page.
+
+Why you’re not seeing the navbar:
+Your navbar is likely:
+
+Missing from the <body> above .container, OR
+
+Added inside the wrong section, OR
+
+Hidden because you pasted only partial code.
+
+Correct placement:
+Your code should look like this:
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="skills.html" class="nav-link">Skills</a>
+    <a href="projects.html" class="nav-link">Projects</a>
+    <a href="special-talent.html" class="nav-link">Special Talent</a>
+  </div>
+</nav>
+
+<div class="container">
+Important:
+The navbar must be:
+ABOVE:
+<div class="container">
+NOT inside:
+<div class="form-box">
+Also add this CSS inside <style>:
+.navbar{
+  width:100%;
+  padding:20px 0;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.nav-container{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:35px;
+  flex-wrap:wrap;
+  padding:0 20px;
+}
+
+.nav-link{
+  color:#d1d5db;
+  text-decoration:none;
+  font-size:1.15rem;
+  font-weight:500;
+  padding:10px 18px;
+  border-radius:14px;
+  transition:0.3s ease;
+}
+
+.nav-link:hover{
+  color:#fff;
+  background:rgba(56,189,248,0.15);
+}
+
+FULL CODEE
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | P. Sai Venkat Ramana</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Space Grotesk',sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(236,72,153,0.18), transparent 40%),
+        #111827;
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:40px 20px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.5rem,6vw,5rem);
+      margin-bottom:15px;
+      background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:750px;
+      margin:auto;
+      color:#d1d5db;
+      line-height:1.7;
+      font-size:1.1rem;
+    }
+
+    .main-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:40px;
+      margin-top:40px;
+    }
+
+    .left-panel{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .card,
+    .form-box,
+    .quick-card{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:24px;
+      padding:25px;
+      backdrop-filter:blur(18px);
+      transition:0.4s;
+    }
+
+    .card:hover,
+    .form-box:hover,
+    .quick-card:hover{
+      transform:translateY(-8px);
+      border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.15);
+    }
+
+    .info-row{
+      display:flex;
+      gap:15px;
+      margin-bottom:18px;
+      align-items:center;
+    }
+
+    .icon-box{
+      width:55px;
+      height:55px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#38bdf8,#6366f1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      flex-shrink:0;
+    }
+
+    .info-text h3{
+      color:#38bdf8;
+      margin-bottom:5px;
+    }
+
+    .info-text p,
+    .info-text a{
+      color:#e5e7eb;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+      margin-top:15px;
+    }
+
+    .social-grid a{
+      padding:18px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      color:#fff;
+      font-size:1.4rem;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .social-grid a:hover{
+      background:linear-gradient(135deg,#38bdf8,#a855f7);
+      transform:scale(1.05);
+    }
+
+    .form-box h2{
+      text-align:center;
+      color:#38bdf8;
+      margin-bottom:25px;
+      font-size:2rem;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    .input-group input,
+    .input-group textarea{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:14px;
+      background:rgba(255,255,255,0.07);
+      color:white;
+      outline:none;
+      font-size:1rem;
+      border:1px solid transparent;
+      transition:0.3s;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus{
+      border-color:#38bdf8;
+      box-shadow:0 0 15px rgba(56,189,248,0.2);
+    }
+
+    .input-group textarea{
+      min-height:140px;
+      resize:none;
+    }
+
+    .submit-btn{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:16px;
+      color:white;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.4s;
+      margin-bottom:12px;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .whatsapp-btn{
+      background:linear-gradient(135deg,#25D366,#128C7E);
+    }
+
+    .telegram-btn{
+      background:linear-gradient(135deg,#229ED9,#1d4ed8);
+    }
+
+    .instagram-btn{
+      background:linear-gradient(135deg,#f97316,#ec4899,#9333ea);
+    }
+
+    #status-message{
+      margin-top:15px;
+      text-align:center;
+      font-weight:600;
+      color:#38bdf8;
+    }
+
+    footer{
+      margin-top:70px;
+      text-align:center;
+      color:#9ca3af;
+      font-size:0.95rem;
+    }
+
+    @media(max-width:992px){
+      .main-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:768px){
+      .social-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .info-row{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Let’s Connect</h1>
+    <p>
+      Reach out for internships, VLSI projects, IoT collaborations, digital design opportunities, or direct communication.
+    </p>
+  </section>
+
+  <!-- MAIN GRID -->
+  <section class="main-grid">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+      <div class="card">
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="info-text">
+            <h3>Location</h3>
+            <p>Vaddeswaram, Andhra Pradesh, India</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+          <div class="info-text">
+            <h3>WhatsApp</h3>
+            <a href="https://wa.me/919182709036" target="_blank">+91 9182709036</a>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-telegram"></i></div>
+          <div class="info-text">
+            <h3>Telegram</h3>
+            <a href="https://t.me/UNLUCKYBOY_2005" target="_blank">@UNLUCKYBOY_2005</a>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <div class="icon-box"><i class="fab fa-instagram"></i></div>
+          <div class="info-text">
+            <h3>Instagram</h3>
+            <a href="https://www.instagram.com/pusarla_ramana/" target="_blank">@pusarla_ramana</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="card">
+        <h3 style="text-align:center; color:#38bdf8;">Connect Socially</h3>
+
+        <div class="social-grid">
+          <a href="https://github.com/PSVRAMANA40248" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/pusarla-sai-venkat-ramana-a44931300/" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://t.me/UNLUCKYBOY_2005" target="_blank"><i class="fab fa-telegram"></i></a>
+          <a href="https://www.instagram.com/pusarla_ramana/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="form-box">
+      <h2>Contact Portal</h2>
+
+      <form id="contact-form">
+
+        <div class="input-group">
+          <input type="text" id="name" placeholder="Full Name" required>
+        </div>
+
+        <div class="input-group">
+          <input type="email" id="email" placeholder="Your Email" required>
+        </div>
+
+        <div class="input-group">
+          <input type="text" id="subject" placeholder="Subject" required>
+        </div>
+
+        <div class="input-group">
+          <textarea id="message" placeholder="Your Message..." required></textarea>
+        </div>
+
+        <!-- WhatsApp -->
+        <button type="button" class="submit-btn whatsapp-btn" onclick="sendWhatsApp()">
+          <i class="fab fa-whatsapp"></i> Send to WhatsApp
+        </button>
+
+        <!-- Telegram -->
+        <button type="button" class="submit-btn telegram-btn" onclick="sendTelegram()">
+          <i class="fab fa-telegram"></i> Send to Telegram
+        </button>
+
+        <!-- Instagram -->
+        <button type="button" class="submit-btn instagram-btn" onclick="sendInstagram()">
+          <i class="fab fa-instagram"></i> Send to Instagram
+        </button>
+
+        <p id="status-message"></p>
+
+      </form>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 P. Sai Venkat Ramana | Future VLSI Engineer
+  </footer>
+
+</div>
+
+<script>
+  const TELEGRAM_USERNAME = "UNLUCKYBOY_2005";
+  const INSTAGRAM_USERNAME = "pusarla_ramana";
+
+  function getFormData() {
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    if (!name || !email || !subject || !message) {
+      document.getElementById("status-message").style.color = "#ef4444";
+      document.getElementById("status-message").innerText = "Please fill all fields!";
+      return null;
+    }
+
+    return Hello P. Sai Venkat Ramana,
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message};
+  }
+
+  /* WhatsApp */
+  function sendWhatsApp() {
+    const text = getFormData();
+    if (!text) return;
+
+    const url = https://wa.me/919182709036?text=${encodeURIComponent(text)};
+    window.open(url, "_blank");
+
+    document.getElementById("status-message").style.color = "#25D366";
+    document.getElementById("status-message").innerText =
+      "Opening WhatsApp...";
+  }
+
+  /* Telegram */
+  function sendTelegram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://t.me/${TELEGRAM_USERNAME}, "_blank");
+
+    document.getElementById("status-message").style.color = "#229ED9";
+    document.getElementById("status-message").innerText =
+      "Message copied. Paste it into Telegram chat with @UNLUCKYBOY_2005";
+  }
+
+  /* Instagram */
+  function sendInstagram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://www.instagram.com/${INSTAGRAM_USERNAME}/, "_blank");
+
+    document.getElementById("status-message").style.color = "#ec4899";
+    document.getElementById("status-message").innerText =
+      "Message copied. Opened Instagram profile @pusarla_ramana — paste in DM.";
+  }
+</script>
+
+</body>
+</html>
+
+in this code where should add that nav part
+
+
+
+
+image(3).png
+see here the lets connect is not visible it is covered nav bar so pls overcome it
+
+/* REPLACE YOUR CURRENT body CSS WITH THIS */
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 40%),
+    radial-gradient(circle at bottom right, rgba(236,72,153,0.18), transparent 40%),
+    #111827;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* REPLACE YOUR CURRENT .navbar CSS WITH THIS */
+.navbar{
+  width:100%;
+  padding:20px 0;
+  background:rgba(17,24,39,0.9);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:1000;
+}
+
+/* REPLACE YOUR CURRENT .container CSS WITH THIS */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:140px 20px 40px; /* pushes content below navbar */
+}
+
+/* ADD THIS NEW HERO FIX */
+.hero{
+  text-align:center;
+  margin-top:20px;
+  margin-bottom:50px;
+}
+
+you only give the full code
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -380,6 +2247,10 @@
     </footer>
 
   </div>
+
+</body>
+</html>
+
 <script>
   const TELEGRAM_USERNAME = "UNLUCKYBOY_2005";
   const INSTAGRAM_USERNAME = "pusarla_ramana";
@@ -389,6 +2260,74 @@
     const email = document.getElementById("email").value;
     const subject = document.getElementById("subject").value;
     const message = document.getElementById("message").value;
+
+    if (!name || !email || !subject || !message) {
+      document.getElementById("status-message").style.color = "#ef4444";
+      document.getElementById("status-message").innerText = "Please fill all fields!";
+      return null;
+    }
+
+    return Hello P. Sai Venkat Ramana,
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message};
+  }
+
+  /* WhatsApp */
+  function sendWhatsApp() {
+    const text = getFormData();
+    if (!text) return;
+
+    const url = https://wa.me/919182709036?text=${encodeURIComponent(text)};
+    window.open(url, "_blank");
+
+    document.getElementById("status-message").style.color = "#25D366";
+    document.getElementById("status-message").innerText =
+      "Opening WhatsApp...";
+  }
+
+  /* Telegram */
+  function sendTelegram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://t.me/${TELEGRAM_USERNAME}, "_blank");
+
+    document.getElementById("status-message").style.color = "#229ED9";
+    document.getElementById("status-message").innerText =
+      "Message copied. Paste it into Telegram chat with @UNLUCKYBOY_2005";
+  }
+
+  /* Instagram */
+  function sendInstagram() {
+    const text = getFormData();
+    if (!text) return;
+
+    navigator.clipboard.writeText(text);
+
+    window.open(https://www.instagram.com/${INSTAGRAM_USERNAME}/, "_blank");
+
+    document.getElementById("status-message").style.color = "#ec4899";
+    document.getElementById("status-message").innerText =
+      "Message copied. Opened Instagram profile @pusarla_ramana — paste in DM.";
+  }
+</script>
+
+<script>
+  const TELEGRAM_USERNAME = "UNLUCKYBOY_2005";
+  const INSTAGRAM_USERNAME = "pusarla_ramana";
+
+  function getFormData() {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
 
     if (!name || !email || !subject || !message) {
       document.getElementById("status-message").style.color = "#ef4444";
@@ -415,8 +2354,7 @@ ${message}`;
     window.open(url, "_blank");
 
     document.getElementById("status-message").style.color = "#25D366";
-    document.getElementById("status-message").innerText =
-      "Opening WhatsApp...";
+    document.getElementById("status-message").innerText = "Opening WhatsApp...";
   }
 
   /* Telegram */
@@ -424,13 +2362,17 @@ ${message}`;
     const text = getFormData();
     if (!text) return;
 
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(text).then(() => {
+      window.open(`https://t.me/${TELEGRAM_USERNAME}`, "_blank");
 
-    window.open(`https://t.me/${TELEGRAM_USERNAME}`, "_blank");
-
-    document.getElementById("status-message").style.color = "#229ED9";
-    document.getElementById("status-message").innerText =
-      "Message copied. Paste it into Telegram chat with @UNLUCKYBOY_2005";
+      document.getElementById("status-message").style.color = "#229ED9";
+      document.getElementById("status-message").innerText =
+        "Message copied. Open Telegram chat with @UNLUCKYBOY_2005 and paste it.";
+    }).catch(() => {
+      document.getElementById("status-message").style.color = "#ef4444";
+      document.getElementById("status-message").innerText =
+        "Clipboard access denied. Copy manually and send via Telegram.";
+    });
   }
 
   /* Instagram */
@@ -438,14 +2380,510 @@ ${message}`;
     const text = getFormData();
     if (!text) return;
 
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(text).then(() => {
+      window.open(`https://www.instagram.com/${INSTAGRAM_USERNAME}/`, "_blank");
 
-    window.open(`https://www.instagram.com/${INSTAGRAM_USERNAME}/`, "_blank");
-
-    document.getElementById("status-message").style.color = "#ec4899";
-    document.getElementById("status-message").innerText =
-      "Message copied. Opened Instagram profile @pusarla_ramana — paste in DM.";
+      document.getElementById("status-message").style.color = "#ec4899";
+      document.getElementById("status-message").innerText =
+        "Message copied. Open Instagram DM for @pusarla_ramana and paste it.";
+    }).catch(() => {
+      document.getElementById("status-message").style.color = "#ef4444";
+      document.getElementById("status-message").innerText =
+        "Clipboard access denied. Copy manually and send via Instagram.";
+    });
   }
 </script>
+
+full code
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | P. Sai Venkat Ramana</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Space Grotesk',sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,0.25), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(236,72,153,0.18), transparent 40%),
+        #111827;
+      color:#fff;
+      overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+    .navbar{
+      width:100%;
+      padding:20px 0;
+      background:rgba(17,24,39,0.95);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1000;
+    }
+
+    .nav-container{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:35px;
+      flex-wrap:wrap;
+      padding:0 20px;
+    }
+
+    .nav-link{
+      color:#d1d5db;
+      text-decoration:none;
+      font-size:1.15rem;
+      font-weight:500;
+      padding:10px 18px;
+      border-radius:14px;
+      transition:0.3s ease;
+    }
+
+    .nav-link:hover{
+      color:#fff;
+      background:rgba(56,189,248,0.15);
+      transform:translateY(-2px);
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      padding:150px 20px 40px;
+    }
+
+    .hero{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .hero h1{
+      font-size:clamp(2.5rem,6vw,5rem);
+      margin-bottom:15px;
+      background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:750px;
+      margin:auto;
+      color:#d1d5db;
+      line-height:1.7;
+      font-size:1.1rem;
+    }
+
+    .main-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:40px;
+      margin-top:40px;
+    }
+
+    .left-panel{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+    }
+
+    .card,
+    .form-box{
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:24px;
+      padding:25px;
+      backdrop-filter:blur(18px);
+      transition:0.4s;
+    }
+
+    .card:hover,
+    .form-box:hover{
+      transform:translateY(-8px);
+      border-color:#38bdf8;
+      box-shadow:0 15px 40px rgba(56,189,248,0.15);
+    }
+
+    .info-row{
+      display:flex;
+      gap:15px;
+      margin-bottom:18px;
+      align-items:center;
+    }
+
+    .icon-box{
+      width:55px;
+      height:55px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#38bdf8,#6366f1);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:22px;
+      flex-shrink:0;
+    }
+
+    .info-text h3{
+      color:#38bdf8;
+      margin-bottom:5px;
+    }
+
+    .info-text p,
+    .info-text a{
+      color:#e5e7eb;
+      text-decoration:none;
+      line-height:1.6;
+    }
+
+    .social-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+      margin-top:15px;
+    }
+
+    .social-grid a{
+      padding:18px;
+      text-align:center;
+      border-radius:18px;
+      background:rgba(255,255,255,0.05);
+      color:#fff;
+      font-size:1.4rem;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .social-grid a:hover{
+      background:linear-gradient(135deg,#38bdf8,#a855f7);
+      transform:scale(1.05);
+    }
+
+    .form-box h2{
+      text-align:center;
+      color:#38bdf8;
+      margin-bottom:25px;
+      font-size:2rem;
+    }
+
+    .input-group{
+      margin-bottom:18px;
+    }
+
+    .input-group input,
+    .input-group textarea{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:14px;
+      background:rgba(255,255,255,0.07);
+      color:white;
+      outline:none;
+      font-size:1rem;
+      border:1px solid transparent;
+      transition:0.3s;
+    }
+
+    .input-group input:focus,
+    .input-group textarea:focus{
+      border-color:#38bdf8;
+      box-shadow:0 0 15px rgba(56,189,248,0.2);
+    }
+
+    .input-group textarea{
+      min-height:140px;
+      resize:none;
+    }
+
+    .submit-btn{
+      width:100%;
+      padding:16px;
+      border:none;
+      border-radius:16px;
+      color:white;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.4s;
+      margin-bottom:12px;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    .whatsapp-btn{
+      background:linear-gradient(135deg,#25D366,#128C7E);
+    }
+
+    .telegram-btn{
+      background:linear-gradient(135deg,#229ED9,#1d4ed8);
+    }
+
+    .instagram-btn{
+      background:linear-gradient(135deg,#f97316,#ec4899,#9333ea);
+    }
+
+    #status-message{
+      margin-top:15px;
+      text-align:center;
+      font-weight:600;
+      color:#38bdf8;
+    }
+
+    footer{
+      margin-top:70px;
+      text-align:center;
+      color:#9ca3af;
+      font-size:0.95rem;
+    }
+
+    @media(max-width:992px){
+      .main-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:768px){
+      .social-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .nav-container{
+        gap:15px;
+      }
+
+      .nav-link{
+        font-size:1rem;
+        padding:8px 14px;
+      }
+
+      .info-row{
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+      }
+
+      .container{
+        padding:180px 20px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="skills.html" class="nav-link">Skills</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="special-talent.html" class="nav-link">Special Talent</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Let’s Connect</h1>
+      <p>
+        Reach out for internships, VLSI projects, IoT collaborations, digital design opportunities, or direct communication.
+      </p>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="main-grid">
+
+      <!-- LEFT PANEL -->
+      <div class="left-panel">
+
+        <div class="card">
+          <div class="info-row">
+            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="info-text">
+              <h3>Location</h3>
+              <p>Vaddeswaram, Andhra Pradesh, India</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+            <div class="info-text">
+              <h3>WhatsApp</h3>
+              <a href="https://wa.me/919182709036" target="_blank">+91 9182709036</a>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fab fa-telegram"></i></div>
+            <div class="info-text">
+              <h3>Telegram</h3>
+              <a href="https://t.me/UNLUCKYBOY_2005" target="_blank">@UNLUCKYBOY_2005</a>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="icon-box"><i class="fab fa-instagram"></i></div>
+            <div class="info-text">
+              <h3>Instagram</h3>
+              <a href="https://www.instagram.com/pusarla_ramana/" target="_blank">@pusarla_ramana</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="card">
+          <h3 style="text-align:center; color:#38bdf8;">Connect Socially</h3>
+          <div class="social-grid">
+            <a href="https://github.com/PSVRAMANA40248" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/pusarla-sai-venkat-ramana-a44931300/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://t.me/UNLUCKYBOY_2005" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://www.instagram.com/pusarla_ramana/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CONTACT FORM -->
+      <div class="form-box">
+        <h2>Contact Portal</h2>
+
+        <form id="contact-form">
+
+          <div class="input-group">
+            <input type="text" id="name" placeholder="Full Name" required>
+          </div>
+
+          <div class="input-group">
+            <input type="email" id="email" placeholder="Your Email" required>
+          </div>
+
+          <div class="input-group">
+            <input type="text" id="subject" placeholder="Subject" required>
+          </div>
+
+          <div class="input-group">
+            <textarea id="message" placeholder="Your Message..." required></textarea>
+          </div>
+
+          <button type="button" class="submit-btn whatsapp-btn" onclick="sendWhatsApp()">
+            <i class="fab fa-whatsapp"></i> Send to WhatsApp
+          </button>
+
+          <button type="button" class="submit-btn telegram-btn" onclick="sendTelegram()">
+            <i class="fab fa-telegram"></i> Send to Telegram
+          </button>
+
+          <button type="button" class="submit-btn instagram-btn" onclick="sendInstagram()">
+            <i class="fab fa-instagram"></i> Send to Instagram
+          </button>
+
+          <p id="status-message"></p>
+
+        </form>
+      </div>
+
+    </section>
+
+    <footer>
+      © 2026 P. Sai Venkat Ramana | Future VLSI Engineer
+    </footer>
+
+  </div>
+
+  <script>
+    const TELEGRAM_USERNAME = "UNLUCKYBOY_2005";
+    const INSTAGRAM_USERNAME = "pusarla_ramana";
+
+    function getFormData() {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !subject || !message) {
+        document.getElementById("status-message").style.color = "#ef4444";
+        document.getElementById("status-message").innerText = "Please fill all fields!";
+        return null;
+      }
+
+      return `Hello P. Sai Venkat Ramana,
+
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message}`;
+    }
+
+    function sendWhatsApp() {
+      const text = getFormData();
+      if (!text) return;
+
+      const url = `https://wa.me/919182709036?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank");
+
+      document.getElementById("status-message").style.color = "#25D366";
+      document.getElementById("status-message").innerText = "Opening WhatsApp...";
+    }
+
+    function sendTelegram() {
+      const text = getFormData();
+      if (!text) return;
+
+      navigator.clipboard.writeText(text).then(() => {
+        window.open(`https://t.me/${TELEGRAM_USERNAME}`, "_blank");
+
+        document.getElementById("status-message").style.color = "#229ED9";
+        document.getElementById("status-message").innerText =
+          "Message copied. Open Telegram and paste it.";
+      }).catch(() => {
+        document.getElementById("status-message").style.color = "#ef4444";
+        document.getElementById("status-message").innerText =
+          "Clipboard blocked. Copy manually.";
+      });
+    }
+
+    function sendInstagram() {
+      const text = getFormData();
+      if (!text) return;
+
+      navigator.clipboard.writeText(text).then(() => {
+        window.open(`https://www.instagram.com/${INSTAGRAM_USERNAME}/`, "_blank");
+
+        document.getElementById("status-message").style.color = "#ec4899";
+        document.getElementById("status-message").innerText =
+          "Message copied. Open Instagram DM and paste it.";
+      }).catch(() => {
+        document.getElementById("status-message").style.color = "#ef4444";
+        document.getElementById("status-message").innerText =
+          "Clipboard blocked. Copy manually.";
+      });
+    }
+  </script>
+
 </body>
 </html>
+
