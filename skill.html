@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Technical Profile - Neon Glass Extra</title>
+<title>Technical Profile</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -22,32 +22,10 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
-
 body{
   font-family:'Inter',sans-serif;
   background: radial-gradient(circle at top,#0a0f1c,#05060a);
   color:var(--text);
-  overflow-x:hidden;
-}
-
-/* BACKGROUND */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(0,245,255,0.08), transparent 40%),
-    radial-gradient(circle at 80% 60%, rgba(124,77,255,0.08), transparent 40%);
-  animation:move 16s infinite alternate;
-  z-index:-1;
-}
-
-@keyframes move{
-  0%{transform:scale(1);}
-  100%{transform:scale(1.1);}
 }
 
 /* NAV */
@@ -87,25 +65,27 @@ nav{
   text-decoration:none;
   font-weight:500;
   position:relative;
+  padding-bottom:5px;
 }
 
+/* hover underline */
 .nav-links a::after{
   content:"";
   position:absolute;
   left:0;
-  bottom:-5px;
+  bottom:0;
   width:0%;
   height:2px;
   background:var(--accent);
   transition:0.3s;
 }
 
-.nav-links a:hover{
-  color:var(--accent);
-}
-
 .nav-links a:hover::after{
   width:100%;
+}
+
+.nav-links a:hover{
+  color:var(--accent);
 }
 
 /* HERO */
@@ -117,19 +97,26 @@ nav{
 .hero h1{
   font-size:3.2rem;
   font-weight:800;
-  background: linear-gradient(90deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  color:var(--accent);
 }
 
-.hero p{
-  color:var(--muted);
-  margin-top:10px;
-}
-
-/* SECTION */
-section{
+/* SECTION WRAPPER */
+.section-wrapper{
+  display:flex;
+  align-items:flex-start;
+  gap:30px;
   padding:80px 10%;
+}
+
+.side-title{
+  min-width:140px;
+  font-size:1rem;
+  font-weight:700;
+  color:var(--accent);
+  letter-spacing:2px;
+  text-transform:uppercase;
+  position:sticky;
+  top:120px;
 }
 
 /* GRID */
@@ -137,6 +124,7 @@ section{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
   gap:20px;
+  flex:1;
 }
 
 /* CARD */
@@ -147,23 +135,6 @@ section{
   border-radius:16px;
   text-align:center;
   transition:0.4s;
-  backdrop-filter: blur(10px);
-  position:relative;
-  overflow:hidden;
-}
-
-/* glow animation */
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(90deg,transparent,rgba(0,245,255,0.15),transparent);
-  transform:translateX(-100%);
-  transition:0.6s;
-}
-
-.card:hover::before{
-  transform:translateX(100%);
 }
 
 .card:hover{
@@ -178,156 +149,86 @@ section{
   color:var(--accent);
 }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:40px;
-  color:var(--muted);
-  border-top:1px solid var(--border);
-  margin-top:40px;
-}
-
-/* SCROLL ANIMATION */
-.card, section{
-  opacity:0;
-  transform:translateY(30px);
-  transition:all 0.6s ease;
-}
-
-.card.show, section.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* BACK TO TOP */
-#topBtn{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:45px;
-  height:45px;
-  border:none;
-  border-radius:50%;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  color:#000;
-  font-size:18px;
-  cursor:pointer;
-  display:none;
-  box-shadow:var(--glow);
-}
-
-/* CURSOR */
-.cursor{
-  position:fixed;
-  width:12px;
-  height:12px;
-  background:var(--accent);
-  border-radius:50%;
-  pointer-events:none;
-  z-index:9999;
-  mix-blend-mode:screen;
-  transform:translate(-50%,-50%);
+/* RESPONSIVE */
+@media(max-width:768px){
+  .section-wrapper{
+    flex-direction:column;
+  }
+  .side-title{
+    position:relative;
+    top:0;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- NAVBAR UPDATED -->
 <nav>
   <div class="nav-container">
     <div class="logo">Tech Profile</div>
+
     <ul class="nav-links">
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#tools">Tools</a></li>
-      <li><a href="#certs">Certs</a></li>
-      <li><a href="#trainings">Trainings</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">about</a></li>
+      <li><a href="Specialtalent.html">Specialtalent</a></li>
+      <li><a href="project.html">project</a></li>
+      <li><a href="contact.html">contact</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="hero">
   <h1>My Technical Profile</h1>
-  <p>Modern Engineering | VLSI | Embedded | Software</p>
+  <p>VLSI | Embedded </p>
 </div>
 
 <!-- SKILLS -->
-<section id="skills">
+<div class="section-wrapper">
+  <div class="side-title">Skills</div>
   <div class="grid">
     <div class="card"><i class="fa-brands fa-c"></i><h3>C Programming</h3></div>
     <div class="card"><i class="fa-brands fa-java"></i><h3>Java</h3></div>
     <div class="card"><i class="fa-solid fa-microchip"></i><h3>Verilog</h3></div>
     <div class="card"><i class="fa-solid fa-diagram-project"></i><h3>SystemVerilog</h3></div>
   </div>
-</section>
+</div>
 
 <!-- TOOLS -->
-<section id="tools">
+<div class="section-wrapper">
+  <div class="side-title">Tools</div>
   <div class="grid">
     <div class="card"><i class="fa-solid fa-microchip"></i><h3>Cadence</h3></div>
     <div class="card"><i class="fa-solid fa-wave-square"></i><h3>Multisim</h3></div>
     <div class="card"><i class="fa-solid fa-rocket"></i><h3>Vivado</h3></div>
     <div class="card"><i class="fa-solid fa-robot"></i><h3>Arduino</h3></div>
   </div>
-</section>
+</div>
 
 <!-- CERTS -->
-<section id="certs">
+<div class="section-wrapper">
+  <div class="side-title">Certificates</div>
   <div class="grid">
     <div class="card"><i class="fa-solid fa-certificate"></i><h3>IoT & Embedded</h3></div>
-    <div class="card"><i class="fa-solid fa-certificate"></i><h3>Salesforce AI</h3></div>
     <div class="card"><i class="fa-solid fa-certificate"></i><h3>SystemVerilog</h3></div>
-    <div class="card"><i class="fa-solid fa-certificate"></i><h3>AI & ML Python</h3></div>
   </div>
-</section>
+</div>
 
 <!-- TRAININGS -->
-<section id="trainings">
+<div class="section-wrapper">
+  <div class="side-title">Trainings</div>
   <div class="grid">
     <div class="card">
       <i class="fa-solid fa-graduation-cap"></i>
       <h3>SystemVerilog (UVM)</h3>
-      <p>8-bit adder verification project</p>
     </div>
     <div class="card">
       <i class="fa-solid fa-graduation-cap"></i>
       <h3>Verilog Design</h3>
-      <p>Digital design fundamentals</p>
     </div>
   </div>
-</section>
-
-<footer>
-  © 2026 Technical Profile | Neon Glass Extra
-</footer>
-
-<!-- CURSOR + BUTTON -->
-<div class="cursor"></div>
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<script>
-// CURSOR
-const cursor = document.querySelector(".cursor");
-document.addEventListener("mousemove",(e)=>{
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-
-// SCROLL EFFECT
-const elements = document.querySelectorAll(".card, section");
-
-window.addEventListener("scroll",()=>{
-  elements.forEach(el=>{
-    const top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight - 100){
-      el.classList.add("show");
-    }
-  });
-
-  // back to top
-  const btn = document.getElementById("topBtn");
-  btn.style.display = window.scrollY > 300 ? "block" : "none";
-});
-</script>
+</div>
 
 </body>
 </html>
