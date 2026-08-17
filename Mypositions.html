@@ -43,10 +43,80 @@
             perspective: 1200px;
         }
 
+        /* ==============================
+           NAVIGATION BAR
+        ============================== */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+
+            width: 100%;
+            height: 64px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 42px;
+
+            padding: 0 24px;
+
+            background: rgba(3, 5, 10, 0.82);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .navbar a {
+            position: relative;
+
+            color: #98a0b3;
+            text-decoration: none;
+
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+
+            transition: color 0.25s ease;
+        }
+
+        .navbar a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+
+            width: 0;
+            height: 2px;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                90deg,
+                var(--purple),
+                var(--cyan)
+            );
+
+            transition: width 0.25s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--text);
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
             }
+
             .card,
             .click-cursor,
             .particle {
@@ -54,6 +124,10 @@
                 transition: none;
             }
         }
+
+        /* ==============================
+           BACKGROUND PARTICLES
+        ============================== */
 
         #particles {
             position: fixed;
@@ -77,14 +151,20 @@
             0% {
                 transform: translate3d(0, 0, 0);
             }
+
             50% {
                 transform: translate3d(25px, -45px, 50px);
                 opacity: 0.9;
             }
+
             100% {
                 transform: translate3d(0, 0, 0);
             }
         }
+
+        /* ==============================
+           MOUSE CURSOR
+        ============================== */
 
         .click-cursor {
             position: fixed;
@@ -145,12 +225,16 @@
             box-shadow: 0 0 35px rgba(139, 92, 246, 0.55);
         }
 
+        /* ==============================
+           MAIN CONTENT
+        ============================== */
+
         .wrap {
             position: relative;
             z-index: 2;
             width: min(1120px, 100%);
             margin: auto;
-            padding: 90px 20px 110px;
+            padding: 154px 20px 110px;
         }
 
         .header {
@@ -188,6 +272,10 @@
             line-height: 1.8;
         }
 
+        /* ==============================
+           TIMELINE
+        ============================== */
+
         .timeline {
             position: relative;
             padding: 10px 0;
@@ -201,7 +289,13 @@
             bottom: 0;
             width: 3px;
             transform: translateX(-50%);
-            background: linear-gradient(#0000, var(--purple) 8%, var(--cyan) 50%, var(--purple) 92%, #0000);
+            background: linear-gradient(
+                #0000,
+                var(--purple) 8%,
+                var(--cyan) 50%,
+                var(--purple) 92%,
+                #0000
+            );
             box-shadow: 0 0 18px rgba(34, 211, 238, 0.25);
         }
 
@@ -230,7 +324,9 @@
             border-radius: 50%;
             background: var(--bg);
             border: 3px solid var(--cyan);
-            box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.07), 0 0 25px var(--cyan);
+            box-shadow:
+                0 0 0 6px rgba(34, 211, 238, 0.07),
+                0 0 25px var(--cyan);
             z-index: 5;
         }
 
@@ -278,10 +374,17 @@
             transform-style: preserve-3d;
             padding: 30px;
             border-radius: 22px;
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018));
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.07),
+                rgba(255, 255, 255, 0.018)
+            );
             border: 1px solid rgba(255, 255, 255, 0.1);
             overflow: hidden;
-            transition: transform 0.12s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            transition:
+                transform 0.12s ease,
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
             will-change: transform;
         }
 
@@ -289,14 +392,20 @@
             content: "";
             position: absolute;
             inset: -60%;
-            background: radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.13), transparent 28%);
+            background: radial-gradient(
+                circle at 50% 50%,
+                rgba(34, 211, 238, 0.13),
+                transparent 28%
+            );
             transform: translateZ(-30px);
             pointer-events: none;
         }
 
         .card:hover {
             border-color: rgba(34, 211, 238, 0.35);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 45px rgba(139, 92, 246, 0.12);
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.55),
+                0 0 45px rgba(139, 92, 246, 0.12);
         }
 
         .number {
@@ -369,23 +478,47 @@
             margin-top: 25px;
         }
 
+        /* ==============================
+           MOBILE
+        ============================== */
+
         @media (max-width: 760px) {
             body {
                 perspective: none;
             }
-            .wrap {
-                padding: 60px 16px 80px;
+
+            .navbar {
+                justify-content: flex-start;
+                gap: 26px;
+                overflow-x: auto;
+                scrollbar-width: none;
             }
+
+            .navbar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .navbar a {
+                font-size: 14px;
+            }
+
+            .wrap {
+                padding: 124px 16px 80px;
+            }
+
             .header {
                 margin-bottom: 55px;
             }
+
             .timeline {
                 padding-left: 36px;
             }
+
             .timeline::before {
                 left: 9px;
                 transform: none;
             }
+
             .item,
             .item:nth-child(odd),
             .item:nth-child(even) {
@@ -394,11 +527,13 @@
                 text-align: left;
                 padding: 0 0 42px 30px;
             }
+
             .item:nth-child(odd) .dot,
             .item:nth-child(even) .dot {
                 left: 0;
                 right: auto;
             }
+
             .item::after,
             .item:nth-child(odd)::after,
             .item:nth-child(even)::after {
@@ -406,15 +541,19 @@
                 right: auto;
                 width: 30px;
             }
+
             .item:nth-child(odd) .tags {
                 justify-content: flex-start;
             }
+
             .card {
                 padding: 24px;
             }
+
             .click-cursor {
                 display: none;
             }
+
             .hint {
                 display: none;
             }
@@ -423,29 +562,56 @@
 </head>
 
 <body>
+    <!-- NAVIGATION -->
+    <nav class="navbar" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <!-- PARTICLES -->
     <div id="particles"></div>
 
+    <!-- CUSTOM CURSOR -->
     <div class="click-cursor" id="clickCursor">
         <span class="mouse-icon"></span>
         <span class="click-label">CLICK</span>
     </div>
 
+    <!-- MAIN CONTENT -->
     <main class="wrap">
         <header class="header">
             <div class="label">Leadership & Positions</div>
             <h1>My <span>Positions</span></h1>
-            <p>Leadership roles and responsibilities across technical activities, campus relations, student leadership, and community initiatives.</p>
+            <p>
+                Leadership roles and responsibilities across technical activities,
+                campus relations, student leadership, and community initiatives.
+            </p>
         </header>
 
         <section class="timeline">
             <article class="item">
                 <div class="dot"></div>
-                <div class="date">2025 – Present <span class="current">Present</span></div>
+
+                <div class="date">
+                    2025 – Present
+                    <span class="current">Present</span>
+                </div>
+
                 <div class="card" role="article" aria-label="IEEE VTS Student Branch position">
                     <div class="number">01</div>
                     <h2>IEEE VTS Student Branch – Student Chair</h2>
                     <div class="org">IEEE VTS Student Branch · KL University</div>
-                    <p class="desc">Serving as Student Chair of the IEEE VTS Student Branch, contributing to student-focused technical activities, coordinating initiatives, and promoting awareness of technology and intelligent transportation systems among students.</p>
+
+                    <p class="desc">
+                        Serving as Student Chair of the IEEE VTS Student Branch,
+                        contributing to student-focused technical activities,
+                        coordinating initiatives, and promoting awareness of technology
+                        and intelligent transportation systems among students.
+                    </p>
+
                     <div class="tags">
                         <span class="tag">Student Leadership</span>
                         <span class="tag">Technical Activities</span>
@@ -457,12 +623,25 @@
 
             <article class="item">
                 <div class="dot"></div>
-                <div class="date">Feb 2026 – Present <span class="current">Present</span></div>
+
+                <div class="date">
+                    Feb 2026 – Present
+                    <span class="current">Present</span>
+                </div>
+
                 <div class="card" role="article" aria-label="PULSE Campus Relations position">
                     <div class="number">02</div>
                     <h2>PULSE Campus Relations – Core Member</h2>
                     <div class="org">PULSE ECE · KL University</div>
-                    <p class="desc">Appointed as Core Team Lead – Campus Relations at KL PULSE ECE, the student body of the ECE Department. Led student engagement and managed internal communications across campus. Coordinated with multiple teams to successfully execute events, promotional activities, and student initiatives.</p>
+
+                    <p class="desc">
+                        Appointed as Core Team Lead – Campus Relations at KL PULSE ECE,
+                        the student body of the ECE Department. Led student engagement
+                        and managed internal communications across campus. Coordinated
+                        with multiple teams to execute events, promotional activities,
+                        and student initiatives.
+                    </p>
+
                     <div class="tags">
                         <span class="tag">Campus Relations</span>
                         <span class="tag">Leadership</span>
@@ -474,12 +653,25 @@
 
             <article class="item">
                 <div class="dot"></div>
-                <div class="date">Jun 2024 – Present <span class="current">Present</span></div>
+
+                <div class="date">
+                    Jun 2024 – Present
+                    <span class="current">Present</span>
+                </div>
+
                 <div class="card" role="article" aria-label="PULSE Technical Team position">
                     <div class="number">03</div>
                     <h2>PULSE Technical Team Member</h2>
                     <div class="org">PULSE ECE · KL University</div>
-                    <p class="desc">Worked as a Technical Team Member at PULSE ECE, contributing to technical activities, events, and IoT and Embedded Systems projects. Led technical sessions, collaborated with team members, and mentored peers in developing ideas into working prototypes.</p>
+
+                    <p class="desc">
+                        Worked as a Technical Team Member at PULSE ECE, contributing
+                        to technical activities, events, and IoT and Embedded Systems
+                        projects. Led technical sessions, collaborated with team
+                        members, and mentored peers in developing ideas into
+                        working prototypes.
+                    </p>
+
                     <div class="tags">
                         <span class="tag">Technical Activities</span>
                         <span class="tag">IoT</span>
@@ -491,12 +683,25 @@
 
             <article class="item">
                 <div class="dot"></div>
-                <div class="date">Nov 2025 – Present <span class="current">Present</span></div>
+
+                <div class="date">
+                    Nov 2025 – Present
+                    <span class="current">Present</span>
+                </div>
+
                 <div class="card" role="article" aria-label="NSS Co-Coordinator position">
                     <div class="number">04</div>
                     <h2>NSS Co-Coordinator – UNIT-8</h2>
                     <div class="org">National Service Scheme · Part-time</div>
-                    <p class="desc">Contributing to the National Service Scheme (NSS), a youth development programme focused on community service and student participation. The role promotes social responsibility, empathy, teamwork, and active involvement in initiatives that contribute to the welfare of society.</p>
+
+                    <p class="desc">
+                        Contributing to the National Service Scheme (NSS), a youth
+                        development programme focused on community service and student
+                        participation. The role promotes social responsibility, empathy,
+                        teamwork, and active involvement in initiatives that contribute
+                        to the welfare of society.
+                    </p>
+
                     <div class="tags">
                         <span class="tag">Coordination</span>
                         <span class="tag">Teamwork</span>
@@ -514,38 +719,51 @@
         const cards = document.querySelectorAll(".card");
 
         cards.forEach((card) => {
-            card.addEventListener("mousemove", function(event) {
+            card.addEventListener("mousemove", (event) => {
                 const rect = card.getBoundingClientRect();
                 const x = event.clientX - rect.left;
                 const y = event.clientY - rect.top;
+
                 const rotateY = ((x / rect.width) - 0.5) * 12;
                 const rotateX = ((y / rect.height) - 0.5) * -12;
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px) scale(1.015)`;
+
+                card.style.transform =
+                    `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px) scale(1.015)`;
             });
 
-            card.addEventListener("touchmove", function(event) {
+            card.addEventListener("mouseleave", () => {
+                card.style.transform =
+                    "rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)";
+            });
+
+            card.addEventListener("touchmove", (event) => {
                 const rect = card.getBoundingClientRect();
                 const touch = event.touches[0];
+
                 const x = touch.clientX - rect.left;
                 const y = touch.clientY - rect.top;
+
                 const rotateY = ((x / rect.width) - 0.5) * 12;
                 const rotateX = ((y / rect.height) - 0.5) * -12;
-                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px) scale(1.015)`;
+
+                card.style.transform =
+                    `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px) scale(1.015)`;
             });
 
-            card.addEventListener("mouseleave", function() {
-                card.style.transform = "rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)";
-            });
-
-            card.addEventListener("touchend", function() {
-                card.style.transform = "rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)";
+            card.addEventListener("touchend", () => {
+                card.style.transform =
+                    "rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)";
             });
         });
 
         const clickCursor = document.getElementById("clickCursor");
-        let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
 
-        window.addEventListener("mousemove", function(event) {
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+
+        window.addEventListener("mousemove", (event) => {
             mouseX = event.clientX;
             mouseY = event.clientY;
             clickCursor.style.opacity = "1";
@@ -554,37 +772,42 @@
         function moveCursor() {
             cursorX += (mouseX - cursorX) * 0.18;
             cursorY += (mouseY - cursorY) * 0.18;
-            clickCursor.style.left = cursorX + "px";
-            clickCursor.style.top = cursorY + "px";
+
+            clickCursor.style.left = `${cursorX}px`;
+            clickCursor.style.top = `${cursorY}px`;
+
             requestAnimationFrame(moveCursor);
         }
 
         moveCursor();
 
-        window.addEventListener("mousedown", function() {
+        window.addEventListener("mousedown", () => {
             clickCursor.classList.add("clicked");
         });
 
-        window.addEventListener("mouseup", function() {
+        window.addEventListener("mouseup", () => {
             clickCursor.classList.remove("clicked");
         });
 
-        document.addEventListener("mouseleave", function() {
+        document.addEventListener("mouseleave", () => {
             clickCursor.style.opacity = "0";
         });
 
-        document.addEventListener("mouseenter", function() {
+        document.addEventListener("mouseenter", () => {
             clickCursor.style.opacity = "1";
         });
 
         const particleBox = document.getElementById("particles");
+
         for (let i = 0; i < 35; i++) {
             const particle = document.createElement("div");
+
             particle.className = "particle";
-            particle.style.left = Math.random() * 100 + "%";
-            particle.style.top = Math.random() * 100 + "%";
-            particle.style.animationDelay = Math.random() * 7 + "s";
-            particle.style.animationDuration = 5 + Math.random() * 6 + "s";
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 7}s`;
+            particle.style.animationDuration = `${5 + Math.random() * 6}s`;
+
             particleBox.appendChild(particle);
         }
     </script>
