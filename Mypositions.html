@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Positions & Leadership — 3D Timeline</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+ --bg:#03050a;--card:#0b0f18;--text:#f5f7ff;--muted:#98a0b3;
+ --purple:#8b5cf6;--cyan:#22d3ee;--pink:#ec4899;
+}
+html{scroll-behavior:smooth}
+body{
+ min-height:100vh;background:
+ radial-gradient(circle at 20% 15%,rgba(139,92,246,.13),transparent 28%),
+ radial-gradient(circle at 85% 70%,rgba(34,211,238,.10),transparent 30%),
+ #03050a;color:var(--text);
+ font-family:Inter,"Segoe UI",Arial,sans-serif;overflow-x:hidden;
+ perspective:1200px;
+}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0}
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;opacity:.5;box-shadow:0 0 12px var(--cyan);animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translate3d(25px,-45px,50px);opacity:.9}}
+
+
+.click-cursor{
+  position:fixed;
+  z-index:30;
+  width:52px;
+  height:52px;
+  border:1px solid rgba(34,211,238,.55);
+  border-radius:50%;
+  background:rgba(3,5,10,.72);
+  backdrop-filter:blur(8px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%,-50%) scale(.8);
+  transition:opacity .2s ease, transform .15s ease;
+  box-shadow:0 0 24px rgba(34,211,238,.18);
+}
+.mouse-icon{
+  color:var(--cyan);
+  font-size:23px;
+  line-height:1;
+  transform:rotate(-35deg);
+}
+.click-label{
+  position:absolute;
+  top:56px;
+  left:50%;
+  transform:translateX(-50%);
+  color:var(--cyan);
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:2px;
+  opacity:.75;
+}
+.click-cursor.clicked{
+  transform:translate(-50%,-50%) scale(1.25);
+  border-color:var(--purple);
+  box-shadow:0 0 35px rgba(139,92,246,.55);
+}
+.wrap{position:relative;z-index:2;width:min(1120px,100%);margin:auto;padding:90px 20px 110px}
+.header{text-align:center;margin-bottom:80px}
+.label{color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:4px;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(42px,7vw,72px);line-height:1;letter-spacing:-3px}
+h1 span{background:linear-gradient(90deg,var(--purple),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.header p{max-width:680px;margin:20px auto 0;color:var(--muted);font-size:15px;line-height:1.8}
+
+.timeline{position:relative;padding:10px 0}
+.timeline:before{
+ content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%);
+ background:linear-gradient(#0000,var(--purple) 8%,var(--cyan) 50%,var(--purple) 92%,#0000);
+ box-shadow:0 0 18px rgba(34,211,238,.25);
+}
+.item{position:relative;width:50%;padding:0 58px 68px;perspective:1000px}
+.item:nth-child(odd){left:0;text-align:right}.item:nth-child(even){left:50%;text-align:left}
+.dot{
+ position:absolute;top:15px;width:19px;height:19px;border-radius:50%;background:#03050a;
+ border:3px solid var(--cyan);box-shadow:0 0 0 6px rgba(34,211,238,.07),0 0 25px var(--cyan);z-index:5
+}
+.item:nth-child(odd) .dot{right:-10px}.item:nth-child(even) .dot{left:-10px}
+.item:after{content:"";position:absolute;top:24px;width:58px;height:1px;background:rgba(34,211,238,.5)}
+.item:nth-child(odd):after{right:0}.item:nth-child(even):after{left:0}
+.date{display:inline-flex;padding:7px 13px;border:1px solid rgba(34,211,238,.2);border-radius:99px;background:rgba(34,211,238,.06);color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:14px}
+.card{
+ position:relative;transform-style:preserve-3d;padding:30px;border-radius:22px;
+ background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018));
+ border:1px solid rgba(255,255,255,.1);overflow:hidden;
+ transition:transform .12s ease,box-shadow .25s ease,border-color .25s ease;
+ will-change:transform;
+}
+.card:before{content:"";position:absolute;inset:-60%;background:radial-gradient(circle at 50% 50%,rgba(34,211,238,.13),transparent 28%);transform:translateZ(-30px);pointer-events:none}
+.card:hover{border-color:rgba(34,211,238,.35);box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 45px rgba(139,92,246,.12)}
+.number{color:#697286;font-size:11px;font-weight:800;letter-spacing:2px;margin-bottom:17px}
+.card h2{font-size:21px;line-height:1.38;margin-bottom:8px}
+.org{color:var(--purple);font-size:14px;font-weight:700;margin-bottom:17px}
+.desc{color:var(--muted);font-size:13.5px;line-height:1.82}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.item:nth-child(odd) .tags{justify-content:flex-end}
+.tag{padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);color:#cbd1df;font-size:10px;font-weight:700}
+.current{margin-left:7px;color:var(--cyan);font-size:9px;letter-spacing:.7px}
+.current:before{content:"●";font-size:7px;margin-right:4px;text-shadow:0 0 8px var(--cyan)}
+
+.hint{text-align:center;color:#667085;font-size:11px;letter-spacing:1px;margin-top:25px}
+
+@media(max-width:760px){
+ body{perspective:none}.wrap{padding:60px 16px 80px}.header{margin-bottom:55px}
+ .timeline{padding-left:36px}.timeline:before{left:9px;transform:none}
+ .item,.item:nth-child(odd),.item:nth-child(even){width:100%;left:0;text-align:left;padding:0 0 42px 30px}
+ .item:nth-child(odd) .dot,.item:nth-child(even) .dot{left:0;right:auto}
+ .item:after,.item:nth-child(odd):after,.item:nth-child(even):after{left:9px;right:auto;width:30px}
+ .item:nth-child(odd) .tags{justify-content:flex-start}.card{padding:24px}
+ .click-cursor{display:none}.hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<div class="click-cursor" id="clickCursor">
+  <span class="mouse-icon">⌁</span>
+  <span class="click-label">CLICK</span>
+</div>
+
+<main class="wrap">
+  <header class="header">
+    <div class="label">Leadership & Positions</div>
+    <h1>My <span>Positions</span></h1>
+    <p>Leadership roles and responsibilities across technical activities, campus relations, student leadership, and community initiatives.</p>
+  </header>
+
+  <section class="timeline">
+
+    <article class="item">
+      <div class="dot"></div>
+      <div class="date">Student Leadership</div>
+      <div class="card">
+        <div class="number">01</div>
+        <h2>IEEE VTS Student Branch – Student Chair</h2>
+        <div class="org">IEEE VTS Student Branch · KL University</div>
+        <p class="desc">Serving as Student Chair of the IEEE VTS Student Branch, contributing to student-focused technical activities, coordinating initiatives, and promoting awareness of technology and intelligent transportation systems among students.</p>
+        <div class="tags">
+          <span class="tag">Student Leadership</span>
+          <span class="tag">Technical Activities</span>
+          <span class="tag">Coordination</span>
+          <span class="tag">Technology Awareness</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="dot"></div>
+      <div class="date">Feb 2026 – Present <span class="current">Present</span></div>
+      <div class="card">
+        <div class="number">02</div>
+        <h2>PULSE Campus Relations – Core Member</h2>
+        <div class="org">PULSE ECE · KL University</div>
+        <p class="desc">Appointed as Core Team Lead – Campus Relations at KL PULSE ECE, the student body of the ECE Department. Led student engagement and managed internal communications across campus. Coordinated with multiple teams to successfully execute events, promotional activities, and student initiatives.</p>
+        <div class="tags">
+          <span class="tag">Campus Relations</span>
+          <span class="tag">Leadership</span>
+          <span class="tag">Communication</span>
+          <span class="tag">Student Engagement</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="dot"></div>
+      <div class="date">Jun 2024 – Present <span class="current">Present</span></div>
+      <div class="card">
+        <div class="number">03</div>
+        <h2>PULSE Technical Team Member</h2>
+        <div class="org">PULSE ECE · KL University</div>
+        <p class="desc">Worked as a Technical Team Member at PULSE ECE, contributing to technical activities, events, and IoT and Embedded Systems projects. Led technical sessions, collaborated with team members, and mentored peers in developing ideas into working prototypes.</p>
+        <div class="tags">
+          <span class="tag">Technical Activities</span>
+          <span class="tag">IoT</span>
+          <span class="tag">Embedded Systems</span>
+          <span class="tag">Mentoring</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="item">
+      <div class="dot"></div>
+      <div class="date">Nov 2025 – Present <span class="current">Present</span></div>
+      <div class="card">
+        <div class="number">04</div>
+        <h2>NSS Co-Coordinator – UNIT-8</h2>
+        <div class="org">National Service Scheme · Part-time</div>
+        <p class="desc">Contributing to the National Service Scheme (NSS), a youth development programme focused on community service and student participation. The role promotes social responsibility, empathy, teamwork, and active involvement in initiatives that contribute to the welfare of society.</p>
+        <div class="tags">
+          <span class="tag">Coordination</span>
+          <span class="tag">Teamwork</span>
+          <span class="tag">Community Service</span>
+          <span class="tag">Social Responsibility</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <div class="hint">MOVE YOUR MOUSE • CLICK TO INTERACT</div>
+</main>
+
+<script>
+/* -------------------------------
+   3D CARD CURSOR TILT
+-------------------------------- */
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+  card.addEventListener("mousemove", e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+
+    const rotateY = ((x / r.width) - 0.5) * 12;
+    const rotateX = ((y / r.height) - 0.5) * -12;
+
+    card.style.transform =
+      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(12px) scale(1.015)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform =
+      "rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)";
+  });
+});
+
+/* -------------------------------
+   MOUSE / CLICK INDICATOR
+-------------------------------- */
+const clickCursor = document.getElementById("clickCursor");
+
+window.addEventListener("mousemove", e => {
+  clickCursor.style.left = e.clientX + "px";
+  clickCursor.style.top = e.clientY + "px";
+  clickCursor.style.opacity = "1";
+});
+
+window.addEventListener("mousedown", () => {
+  clickCursor.classList.add("clicked");
+});
+
+window.addEventListener("mouseup", () => {
+  clickCursor.classList.remove("clicked");
+});
+
+/* -------------------------------
+   FLOATING PARTICLES
+-------------------------------- */
+const particleBox = document.getElementById("particles");
+
+for (let i = 0; i < 35; i++) {
+  const p = document.createElement("div");
+  p.className = "particle";
+
+  p.style.left = Math.random() * 100 + "%";
+  p.style.top = Math.random() * 100 + "%";
+  p.style.animationDelay = Math.random() * 7 + "s";
+  p.style.animationDuration = 5 + Math.random() * 6 + "s";
+
+  particleBox.appendChild(p);
+}
+</script>
+
+</body>
+</html>
